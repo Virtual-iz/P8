@@ -14,6 +14,11 @@ import { faTableList, faCalendarDays, faPaperPlane } from "@fortawesome/free-sol
  */
 import carteGrenoble from '../../assets/img/img-carte-grenoble.png';
 
+/**
+ * Section Contact de la page d'accueil.
+ * Gère le formulaire de contact et l'envoi vers le backend.
+ * API_URL inclut déjà /api, donc on n'ajoute pas /api dans le chemin.
+ */
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -39,7 +44,7 @@ const Contact = () => {
     setSuccess(false);
 
     try {
-      const res = await fetch(`${API_URL}/api/contact`, {
+      const res = await fetch(`${API_URL}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

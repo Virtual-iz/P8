@@ -14,8 +14,9 @@ dotenv.config();
 
 const app = express();
 
-// ✅ SERT LES IMAGES DEPUIS LE DOSSIER img/ À LA RACINE (accessible via /img/...)
-app.use('/img', express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), '../img')));
+// Sert les images des projets depuis backend/img/
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use('/img', express.static(path.join(__dirname, 'img')));
 
 // Middleware pour parser les requêtes JSON (limite à 10Mo pour éviter les attaques DoS)
 app.use(express.json({ limit: '10mb' }));

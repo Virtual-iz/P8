@@ -1,0 +1,21 @@
+# ========== BACKEND ==========
+backend/node_modules/
+backend/.env
+backend/img/  # Les images seront gérées séparément
+
+# ========== FRONTEND ==========
+front/node_modules/
+front/.env
+front/.vite/    # Vite
+front/dist/     # Dossier de build
+
+# ========== LOGs et IDE ==========
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.swp
+
+# ========== SYSTÈME ==========
+*.bak
+*.tmp

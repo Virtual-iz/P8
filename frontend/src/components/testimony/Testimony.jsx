@@ -1,11 +1,15 @@
 import React from 'react';
 import './Testimony.scss';
+import { IMG_URL } from '../../config';
 
 const Testimony = ({ client, mission, testimony, avatar }) => {
   return (
     <figure className="testimony">
       <div className="testimony__avatar">
-        {avatar ? <img src={`/img/${avatar}`} alt={`Avatar de ${client}`} /> : <div className="testimony__placeholder" />}
+        {avatar
+          ? <img src={`${IMG_URL}/${avatar}`} alt={`Avatar de ${client}`} />
+          : <div className="testimony__placeholder" />
+        }
       </div>
       <div className="testimony__content">
         <figcaption className="testimony__meta">

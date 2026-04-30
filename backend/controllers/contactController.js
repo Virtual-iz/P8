@@ -1,30 +1,22 @@
 import nodemailer from 'nodemailer';
 
 /**
- * Configuration du transporteur SMTP pour l'envoi d'emails.
- * Utilise les variables d'environnement pour les identifiants.
+ * Transporteur SMTP — identifiants via variables d'environnement.
+ * rejectUnauthorized: false pour tolérer les certificats auto-signés en local.
  */
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: parseInt(process.env.SMTP_PORT, 10) || 587,
-  secure: false, // STARTTLS sera utilisé
+  secure: false, // STARTTLS
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-  tls: {
-    // Ne rejette pas les certificats auto-signés (utile pour les serveurs locaux)
-    rejectUnauthorized: false
-  }
+  tls: { rejectUnauthorized: false }
 });
 
-/**
- * Fonction pour envoyer un email de contact.
- * @param {Object} contactData - Données du formulaire de contact
- */
-const sendContactEmail = async (contactData) => {
-  const { name, email, service, deadline, message } = contactData;
-
+/** Envoie l'email de contact via SMTP. */
+const sendContactEmail = async ({ name, email, service, deadline, message }) => {
   await transporter.sendMail({
     from: `"Portfolio Contact" <${process.env.SMTP_USER}>`,
     to: process.env.CONTACT_EMAIL,
@@ -42,16 +34,10 @@ const sendContactEmail = async (contactData) => {
   });
 };
 
-/**
- * Contrôleur pour gérer l'envoi d'un message via le formulaire.
- * @param {Object} req - Requête Express
- * @param {Object} res - Réponse Express
- * @param {Function} next - Middleware suivant
- */
+/** Contrôleur POST /api/contact — valide les champs et envoie l'email. */
 export const sendMessage = async (req, res, next) => {
   const { name, email, message } = req.body;
 
-  // Vérifie que les champs obligatoires sont présents
   if (!name || !email || !message) {
     const err = new Error('Champs requis manquants');
     err.status = 400;

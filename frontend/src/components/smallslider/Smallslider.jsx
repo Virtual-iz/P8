@@ -9,6 +9,11 @@ const getVisibleSlides = () => {
   return 1;
 };
 
+/**
+ * Composant Smallslider.
+ * Affiche un carrousel de témoignages clients.
+ * API_URL inclut déjà /api, donc on n'ajoute pas /api dans le chemin.
+ */
 const Smallslider = () => {
   const [testimonies, setTestimonies] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,7 +21,7 @@ const Smallslider = () => {
   const sliderRef = useRef(null);
 
   useEffect(() => {
-    fetch(`${API_URL}/api/testimonies`)
+    fetch(`${API_URL}/testimonies`)
       .then(res => res.json())
       .then(setTestimonies)
       .catch(err => console.error('Erreur chargement témoignages :', err));

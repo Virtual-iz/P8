@@ -4,17 +4,14 @@ import ProjectCard from '../projectcard/ProjectCard';
 import ProjectModal from '../projectmodal/ProjectModal';
 import AdminModal from '../adminmodal/AdminModal';
 import { API_URL } from '../../config';  // ✅ Chemin corrigé : ../../config (depuis src/components/projectsgallery/)
-import { faPen, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /**
- * Composant ProjectsGallery.
- * Affiche une galerie de projets avec :
+ * Galerie de projets.
  * - Lecture seule pour les visiteurs
  * - Mode édition pour les admins (via AdminModal)
- * - Carte "Nouveau Projet" pour créer un projet (uniquement pour les admins)
- * @param {Set} activeFilters - Filtres actifs pour filtrer les projets
- * @param {boolean} isAdmin - Statut admin de l'utilisateur
+ * - Carte "Nouveau Projet" pour les admins
  */
 const ProjectsGallery = ({ activeFilters, isAdmin }) => {
   const [projects, setProjects] = useState([]);
@@ -22,11 +19,9 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [editingProject, setEditingProject] = useState(null);
 
-  /**
-   * Charge les projets depuis l'API au montage du composant.
-   */
+  // API_URL inclut déjà /api, ne pas l'ajouter dans le chemin
   useEffect(() => {
-    fetch(`${API_URL}/api/projects`)
+    fetch(`${API_URL}/projects`)
       .then(res => {
         if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);
         return res.json();
@@ -41,10 +36,7 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
       .finally(() => setLoading(false));
   }, []);
 
-  /**
-   * Sauvegarde un projet (création ou mise à jour).
-   * @param {Object|FormData} updatedProject - Projet avec les modifications ou FormData (si images uploadées)
-   */
+  /** Sauvegarde un projet (création ou mise à jour) via l'API. */
   const handleSave = async (updatedProject) => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
@@ -53,24 +45,15 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
     }
 
     try {
-      const url = updatedProject.id
-        ? `${API_URL}/api/projects/${updatedProject.id}`
-        : `${API_URL}/api/projects`;
-      const method = updatedProject.id ? 'PUT' : 'POST';
-
-      const headers = {
-        'Authorization': `Bearer ${token}`,
-      };
-      if (!(updatedProject instanceof FormData)) {
-        headers['Content-Type'] = 'application/json';
-      }
+      // updatedProject est toujours un FormData (cf. AdminModal)
+      const id = JSON.parse(updatedProject.get('data')).id;
+      const url = id ? `${API_URL}/projects/${id}` : `${API_URL}/projects`;
+      const method = id ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
-        method: method,
-        headers: headers,
-        body: updatedProject instanceof FormData
-          ? updatedProject
-          : JSON.stringify(updatedProject)
+        method,
+        headers: { 'Authorization': `Bearer ${token}` },
+        body: updatedProject,
       });
 
       if (!res.ok) throw new Error('Erreur sauvegarde');
@@ -78,7 +61,7 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
       const saved = await res.json();
       setProjects(prev => {
         if (!Array.isArray(prev)) return [saved];
-        return updatedProject.id
+        return id
           ? prev.map(p => p.id === saved.id ? saved : p)
           : [...prev, saved];
       });
@@ -90,10 +73,6 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
     }
   };
 
-  /**
-   * Filtre les projets selon les filtres actifs.
-   * @returns {Array} Tableau de projets filtrés
-   */
   const filteredProjects = Array.isArray(projects)
     ? projects.filter(project => {
         if (activeFilters.has('all')) return true;
@@ -101,53 +80,30 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
       })
     : [];
 
+  // Objet vide pour initialiser la modale de création
+  const emptyProject = {
+    id: '', title: '', p1: '', cover: '', demo: '',
+    title2: '', title3: '', title4: '',
+    pictures: [], p2: [], p3: [], p4: [], filtres: [], tags: []
+  };
+
   if (loading) return <p>Chargement des projets...</p>;
 
   return (
     <>
       <article id="projectsgallery" className="grid col3">
-        {/* ✅ CARTE "NOUVEAU PROJET" POUR LES ADMINS */}
+        {/* Carte "Nouveau Projet" (admins uniquement) */}
         {isAdmin && (
           <div
             className="projectcard new-project-card"
-            onClick={() => setEditingProject({
-              id: '',
-              title: '',
-              p1: '',
-              cover: '',
-              demo: '',
-              title2: '',
-              title3: '',
-              title4: '',
-              pictures: [],
-              p2: [],
-              p3: [],
-              p4: [],
-              filtres: [],
-              tags: []
-            })}
+            onClick={() => setEditingProject(emptyProject)}
             role="button"
             aria-label="Créer un nouveau projet"
             tabIndex="0"
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                setEditingProject({
-                  id: '',
-                  title: '',
-                  p1: '',
-                  cover: '',
-                  demo: '',
-                  title2: '',
-                  title3: '',
-                  title4: '',
-                  pictures: [],
-                  p2: [],
-                  p3: [],
-                  p4: [],
-                  filtres: [],
-                  tags: []
-                });
+                setEditingProject(emptyProject);
               }
             }}
           >
@@ -158,7 +114,6 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
           </div>
         )}
 
-        {/* Projets existants */}
         {filteredProjects.length > 0 ? (
           filteredProjects.map(item => (
             <ProjectCard
@@ -174,7 +129,7 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
         )}
       </article>
 
-      {/* MODALES */}
+      {/* Modales */}
       {isAdmin && editingProject && (
         <AdminModal
           project={editingProject}

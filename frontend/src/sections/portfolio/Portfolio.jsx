@@ -3,39 +3,16 @@ import ProjectsGallery from '../../components/projectsgallery/ProjectsGallery';
 import Filters from '../../components/filters/Filters';
 import './Portfolio.scss';
 
-/**
- * Section Portfolio de la page d'accueil.
- * Gère :
- * - Les filtres de projets
- * - Le passage du statut admin à ProjectsGallery
- * @param {boolean} isAdmin - Statut admin de l'utilisateur
- */
+/** Section Portfolio — gère les filtres et transmet le statut admin. */
 const Portfolio = ({ isAdmin }) => {
-  // État pour les filtres actifs (par défaut : "all")
   const [activeFilters, setActiveFilters] = useState(new Set(['all']));
 
-  /**
-   * Met à jour les filtres actifs.
-   * @param {Set} filters - Nouveau Set de filtres
-   */
-  const handleFilterChange = (filters) => {
-    setActiveFilters(filters);
-  };
-
-  // Réinitialise les filtres à "Tous" lors du rechargement de la page
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      setActiveFilters(new Set(['all']));
-    };
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
-
-  // Réinitialise les filtres à "Tous" lors du premier rendu
+  // Réinitialise les filtres à "Tous" au chargement et au rechargement de page
   useEffect(() => {
     setActiveFilters(new Set(['all']));
+    const reset = () => setActiveFilters(new Set(['all']));
+    window.addEventListener('beforeunload', reset);
+    return () => window.removeEventListener('beforeunload', reset);
   }, []);
 
   return (
@@ -45,10 +22,9 @@ const Portfolio = ({ isAdmin }) => {
         <div className="yellowline" aria-hidden="true"></div>
       </div>
       <Filters
-        onFilterChange={handleFilterChange}
+        onFilterChange={setActiveFilters}
         activeFilters={activeFilters}
       />
-      {/* ✅ Transmet isAdmin à ProjectsGallery */}
       <ProjectsGallery
         activeFilters={activeFilters}
         isAdmin={isAdmin}

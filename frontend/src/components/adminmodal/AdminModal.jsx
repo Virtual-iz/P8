@@ -4,40 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 
 // ========== UTILITAIRES ==========
-/**
- * Convertit un tableau en string avec sauts de ligne.
- * @param {Array} arr - Tableau à convertir
- * @returns {string} String avec éléments séparés par \n
- */
+/** Convertit un tableau en string avec sauts de ligne. */
 const arrayToLines = (arr) => Array.isArray(arr) ? arr.join('\n') : '';
 
-/**
- * Convertit une string avec sauts de ligne en tableau.
- * @param {string} str - String à convertir
- * @returns {Array} Tableau des éléments non vides
- */
+/** Convertit une string avec sauts de ligne en tableau (éléments non vides). */
 const linesToArray = (str) => str.split('\n').map(s => s.trim()).filter(Boolean);
 
-/**
- * Convertit un tableau en string CSV.
- * @param {Array} arr - Tableau à convertir
- * @returns {string} String CSV
- */
+/** Convertit un tableau en string CSV. */
 const arrayToCSV = (arr) => Array.isArray(arr) ? arr.join(', ') : '';
 
-/**
- * Convertit une string CSV en tableau.
- * @param {string} str - String à convertir
- * @returns {Array} Tableau des éléments non vides
- */
+/** Convertit une string CSV en tableau (éléments non vides). */
 const csvToArray = (str) => str.split(',').map(s => s.trim()).filter(Boolean);
 
 // ========== COMPOSANTS ==========
-/**
- * Wrapper pour éviter la répétition label + input.
- * @param {string} label - Texte du label
- * @param {React.ReactNode} children - Contenu (input/textarea)
- */
+/** Wrapper label + champ pour éviter la répétition. */
 const Field = ({ label, children }) => (
   <div className="admin-field">
     <label className="admin-label">{label}</label>
@@ -47,14 +27,11 @@ const Field = ({ label, children }) => (
 
 // ========== COMPOSANT PRINCIPAL ==========
 /**
- * Composant AdminModal.
  * Formulaire pour créer/modifier un projet (admin uniquement).
- * @param {Object} project - Projet à modifier (ou vide pour création)
- * @param {Function} onClose - Fonction pour fermer la modale
- * @param {Function} onSave - Fonction pour sauvegarder les modifications
+ * Envoie toujours un FormData : requis par le middleware multer du backend
+ * qui lit les données via req.body.data (ne parse pas le JSON classique).
  */
 const AdminModal = ({ project, onClose, onSave }) => {
-  // État local pour les champs du formulaire
   const [form, setForm] = useState({
     id: '',
     title: '',
@@ -71,53 +48,30 @@ const AdminModal = ({ project, onClose, onSave }) => {
     _p4: arrayToLines(project?.p4),
     _filtres: arrayToCSV(project?.filtres),
     _tags: arrayToCSV(project?.tags),
-    _newImages: [] // Stockage temporaire des nouvelles images uploadées
+    _newImages: []
   });
 
-  /**
-   * Met à jour un champ du formulaire.
-   * @param {string} key - Nom du champ
-   * @param {any} value - Valeur du champ
-   */
   const set = (key, value) => setForm(prev => ({ ...prev, [key]: value }));
 
-  /**
-   * Gère la soumission du formulaire.
-   * Convertit les champs temporaires (ex: _pictures) en tableaux avant envoi.
-   * @param {Event} e - Événement de soumission
-   */
   const handleSubmit = (e) => {
     e.preventDefault();
     const { _pictures, _p2, _p3, _p4, _filtres, _tags, _newImages, ...rest } = form;
 
-    if (_newImages.length > 0) {
-      // Si des images ont été uploadées, utilise FormData
-      const formData = new FormData();
-      formData.append('data', JSON.stringify({
-        ...rest,
-        pictures: linesToArray(_pictures),
-        p2: linesToArray(_p2),
-        p3: linesToArray(_p3),
-        p4: linesToArray(_p4),
-        filtres: csvToArray(_filtres),
-        tags: csvToArray(_tags),
-      }));
-      _newImages.forEach(file => {
-        formData.append('images', file);
-      });
-      onSave(formData);
-    } else {
-      // Sinon, envoie un objet JSON classique
-      onSave({
-        ...rest,
-        pictures: linesToArray(_pictures),
-        p2: linesToArray(_p2),
-        p3: linesToArray(_p3),
-        p4: linesToArray(_p4),
-        filtres: csvToArray(_filtres),
-        tags: csvToArray(_tags),
-      });
-    }
+    const payload = {
+      ...rest,
+      pictures: linesToArray(_pictures),
+      p2: linesToArray(_p2),
+      p3: linesToArray(_p3),
+      p4: linesToArray(_p4),
+      filtres: csvToArray(_filtres),
+      tags: csvToArray(_tags),
+    };
+
+    const formData = new FormData();
+    formData.append('data', JSON.stringify(payload));
+    _newImages.forEach(file => formData.append('images', file));
+
+    onSave(formData);
   };
 
   if (!project) return null;

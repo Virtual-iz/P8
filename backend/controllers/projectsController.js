@@ -3,13 +3,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// Chemin vers le fichier projects.json dans backend/datas/
 const PROJECTS_PATH = path.join(__dirname, '../datas/projects.json');
 
-/**
- * Lit le fichier projects.json et retourne son contenu parsé en tableau.
- * @returns {Promise<Array>} Tableau de projets ou tableau vide en cas d'erreur.
- */
+/** @returns {Promise<Array>} Tableau de projets, ou [] en cas d'erreur. */
 const readProjects = async () => {
   try {
     const data = await fs.readFile(PROJECTS_PATH, 'utf-8');
@@ -20,19 +16,11 @@ const readProjects = async () => {
   }
 };
 
-/**
- * Écrit les projets dans le fichier projects.json.
- * @param {Array} projects - Tableau de projets à écrire.
- */
 const writeProjects = async (projects) => {
   await fs.writeFile(PROJECTS_PATH, JSON.stringify(projects, null, 2));
 };
 
-/**
- * Contrôleur pour GET /api/projects
- * @param {Object} req - Requête Express
- * @param {Object} res - Réponse Express
- */
+/** GET /api/projects */
 export const getAllProjects = async (req, res) => {
   try {
     const projects = await readProjects();
@@ -42,12 +30,7 @@ export const getAllProjects = async (req, res) => {
   }
 };
 
-/**
- * Contrôleur pour PUT /api/projects/:id
- * @param {Object} req - Requête Express
- * @param {Object} res - Réponse Express
- * @param {Function} next - Middleware suivant
- */
+/** PUT /api/projects/:id */
 export const updateProject = async (req, res, next) => {
   try {
     const projects = await readProjects();

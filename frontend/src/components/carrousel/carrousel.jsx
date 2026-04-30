@@ -2,6 +2,7 @@ import './Carrousel.scss';
 import { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { IMG_URL } from '../../config';
 
 const Carrousel = ({ data }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -11,15 +12,11 @@ const Carrousel = ({ data }) => {
   }
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? data.pictures.length - 1 : prevIndex - 1
-    );
+    setCurrentIndex(prev => prev === 0 ? data.pictures.length - 1 : prev - 1);
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === data.pictures.length - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentIndex(prev => prev === data.pictures.length - 1 ? 0 : prev + 1);
   };
 
   const showArrows = data.pictures.length > 1;
@@ -27,7 +24,7 @@ const Carrousel = ({ data }) => {
   return (
     <div className="carrousel">
       <img
-        src={`/img/${data.pictures[currentIndex]}`}
+        src={`${IMG_URL}/${data.pictures[currentIndex]}`}
         alt={`Vue image n°${currentIndex + 1}`}
       />
       {showArrows && (

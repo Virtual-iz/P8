@@ -4,12 +4,7 @@ import Tag from '../tag/Tag';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-/**
- * Composant ProjectModal.
- * Affiche une modale avec les détails d'un projet.
- * @param {Object} project - Projet à afficher
- * @param {Function} onClose - Fonction pour fermer la modale
- */
+/** Modale de détail d'un projet : carrousel, tags, lien démo, textes. */
 const ProjectModal = ({ project, onClose }) => {
   if (!project) return null;
 
@@ -26,7 +21,6 @@ const ProjectModal = ({ project, onClose }) => {
         onClick={(e) => e.stopPropagation()}
         tabIndex="-1"
       >
-        {/* Bouton de fermeture */}
         <button
           className="close-btn"
           onClick={onClose}
@@ -35,18 +29,15 @@ const ProjectModal = ({ project, onClose }) => {
           ✕
         </button>
 
-        {/* Carrousel d'images (avec lazy loading géré dans Carrousel) */}
         <Carrousel data={project} />
 
         <article className="modal-top">
-          {/* Tags du projet */}
           <div className="tags-container" aria-label={`Filtres : ${project.filtres?.join(', ') || 'Aucun'}`}>
             {project.filtres?.map((f, i) => (
               <Tag key={i} item={f} />
             ))}
           </div>
 
-          {/* Bouton Démo */}
           <a
             href={project.demo}
             target="_blank"
@@ -58,7 +49,6 @@ const ProjectModal = ({ project, onClose }) => {
           </a>
         </article>
 
-        {/* Contenu textuel du projet */}
         <article className="modal-text grid col2">
           <div>
             <h3 id="modal-title">{project.title}</h3>
@@ -66,21 +56,15 @@ const ProjectModal = ({ project, onClose }) => {
           </div>
           <div>
             <h3>{project.title2}</h3>
-            {project.p2?.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
+            {project.p2?.map((p, i) => <p key={i}>{p}</p>)}
           </div>
           <div>
             <h3>{project.title3}</h3>
-            {project.p3?.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
+            {project.p3?.map((p, i) => <p key={i}>{p}</p>)}
           </div>
           <div>
             <h3>{project.title4}</h3>
-            {project.p4?.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
+            {project.p4?.map((p, i) => <p key={i}>{p}</p>)}
           </div>
         </article>
       </div>

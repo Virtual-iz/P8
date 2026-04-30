@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet'; // ✅ Import de Helmet pour le SEO
-import { faEnvelope, faHouse, faUser, faCog, faBriefcase } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from 'react-helmet';
 import Header from '../sections/header/Header';
 import NavBar from '../sections/navbar/NavBar';
 import About from '../sections/about/About';
@@ -13,31 +12,19 @@ import AdminLogin from '../components/adminlogin/AdminLogin';
 import '../App.scss';
 
 /**
- * Composant principal de la page d'accueil.
- * Gère :
- * - L'état de connexion admin
- * - L'affichage des modales (connexion admin)
- * - Le passage des props aux sections
- * - ✅ Le SEO de la page (intégré directement ici pour une meilleure visibilité)
+ * Page d'accueil — gère l'état de connexion admin
+ * et orchestre toutes les sections.
  */
 const Home = () => {
-  // État pour gérer la connexion admin (initialisé avec le token du localStorage)
   const [isAdmin, setIsAdmin] = useState(!!localStorage.getItem('admin_token'));
   const [isAdminOpen, setIsAdminOpen] = useState(false);
 
-  /**
-   * Gère la connexion admin réussie.
-   * @param {string} token - Token JWT reçu après connexion
-   */
   const handleLogin = (token) => {
     localStorage.setItem('admin_token', token);
     setIsAdmin(true);
     setIsAdminOpen(false);
   };
 
-  /**
-   * Gère la déconnexion admin.
-   */
   const handleLogout = () => {
     localStorage.removeItem('admin_token');
     setIsAdmin(false);
@@ -45,12 +32,6 @@ const Home = () => {
 
   return (
     <main>
-      {/* =========================================
-           ✅ SEO : BALISES META INTÉGRÉES DIRECTEMENT
-           =========================================
-           - Les balises sont spécifiques à la page d'accueil
-           - Utilisation de react-helmet pour injecter dans <head>
-      */}
       <Helmet>
         {/* --- Balises meta de base --- */}
         <title>Portfolio - Développeuse Full Stack & Photographe | Votre Nom</title>
@@ -137,10 +118,6 @@ const Home = () => {
         <meta name="application-name" content="Portfolio - Votre Nom" />
         <meta name="msapplication-TileColor" content="#2ecc71" />
       </Helmet>
-
-      {/* =========================================
-           FIN SEO
-           ========================================= */}
 
       <NavBar />
       <Header

@@ -19,6 +19,7 @@ const AdminLogin = ({ isOpen, onClose, onLogin }) => {
 
   /**
    * Gère la soumission du formulaire de connexion.
+   * API_URL inclut déjà /api, donc on n'ajoute pas /api dans le chemin.
    * @param {Event} e - Événement de soumission
    */
   const handleSubmit = async (e) => {
@@ -27,7 +28,7 @@ const AdminLogin = ({ isOpen, onClose, onLogin }) => {
     setError('');
 
     try {
-      const res = await fetch(`${API_URL}/api/auth/login`, {
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, password }),

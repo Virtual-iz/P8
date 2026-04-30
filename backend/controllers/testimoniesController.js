@@ -5,10 +5,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TESTIMONIES_PATH = path.join(__dirname, '../datas/testimonies.json');
 
-/**
- * Lit le fichier testimonies.json.
- * @returns {Promise<Array>} Tableau de témoignages.
- */
+/** @returns {Promise<Array>} Tableau de témoignages, ou [] en cas d'erreur. */
 const readTestimonies = async () => {
   try {
     const data = await fs.readFile(TESTIMONIES_PATH, 'utf-8');
@@ -19,11 +16,7 @@ const readTestimonies = async () => {
   }
 };
 
-/**
- * Contrôleur pour GET /api/testimonies
- * @param {Object} req - Requête Express
- * @param {Object} res - Réponse Express
- */
+/** GET /api/testimonies */
 export const getAllTestimonies = async (req, res) => {
   try {
     const testimonies = await readTestimonies();
