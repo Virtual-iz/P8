@@ -1,0 +1,80 @@
+// Styles spécifiques à l'admin
+
+.admin-modal {
+  padding: 30px;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 6px; // compense la scrollbar
+}
+
+.admin-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.admin-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--vert-fonce);
+}
+
+.admin-input,
+.admin-textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  color: var(--noir-attenue);
+  background: white;
+  transition: border-color 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--jaune-vif);
+  }
+
+  &:disabled {
+    background: #f0f0f0;
+    color: #888;
+    cursor: not-allowed;
+  }
+}
+
+.admin-textarea {
+  resize: vertical;
+}
+
+.admin-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.admin-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,154 @@
+#home {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 60px;
+  background-image: url('../../assets/img/kennet-river_isabelle-zezima.jpg');
+  background-size: cover;
+  background-position: center;
+  color: var(--blanc-casse);
+  //overflow: hidden;
+  //darken background
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+  }
+    //children position//
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+//2 COLONNES (dont 1 = titre + texte)//
+.home-content{
+    display: flex;
+    justify-content: space-between;
+    gap : 20px;
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
+    }
+}
+
+  //TITRE ET ACCROCHE//
+.titre-et-accroche{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    gap : 20px;
+    order : 1;
+    @media (max-width: 768px) {
+        order : 2;
+    }
+
+}
+  //TITRE//
+  .titre-site {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 100%;
+    height: 400px;
+    padding-top: 40px;
+
+    h2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+            @media (max-width: 880px) {
+            font-size: 38px;
+            }
+        
+    }
+
+  }
+
+//TEXTE + SOCIALS//
+.accroche {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 400px;
+    padding-top: 40px;
+
+    p{
+        //80 hauteur logo + 15 padding h2 pour compenser
+        padding-top: 95px;
+        font-size: 1.39rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            @media (max-width: 880px) {
+            font-size: 1.15rem;
+            }
+    }
+    //boutons cv et in
+    div{
+      display: flex;
+    }
+
+    
+}
+
+//PROFIL PICTURE//
+
+.profilpic {
+  display: flex;
+  justify-content: flex-end;
+   order : 1;
+    @media (max-width: 768px) {
+    order : 2;
+    }
+
+.admin-btn--connected {
+  opacity: 0.7;
+  color: var(--jaune-vif);
+  gap: 6px;
+
+  .admin-btn__label {
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+
+}
+
+    
+.blob {
+  
+  clip-path: url(#blob-clip);
+  -webkit-clip-path: url(#blob-clip);
+}
+.blob img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+  .admin-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--vert-beige);
+    opacity: 0.2;
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+
+    &:hover {transform: scale(1.1);}
+
+    }
+
+}
+
+
+}

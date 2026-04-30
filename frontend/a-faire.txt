@@ -1,0 +1,506 @@
+HEADER : 
+- Faire passer picture en premier en -768px (flex order ne semble pas fonctionner)
+- la mettre dans la bonne shape
+- Sous 480 faire menu icones exclusivement
+
+ABOUT : 
+- moduler l'opacité du fond a motif : 
+<div class="demo-wrap">
+  <div class="demo-content">
+    <h1>Hello World!</h1>
+  </div>
+</div>
+
+.demo-wrap {
+  position: relative;
+}
+.demo-wrap::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background-image: url('https://assets.digitalocean.com/labs/images/community_bg.png');
+  background-repeat: no-repeat;
+  background-position: 50% 0;
+  background-size: cover;
+}
+.demo-content {
+  position: relative;
+}
+
+
+CONTACT : 
+- Mettre la carte et les avions déco en arrière plan
+- bouton envoi à droite
+
+
+Autre
+- étoffer page linkedin
+- changer le fichier virtualiz-cv dans assets
+
+- scale 1 sur tous les boutons cliquables ronds / menu / fleches etc
+- translateX sur les boutons envoi / validation / action utilisateur
+
+
+
+
+Fichier à ajouter : robots.txt à la racine du projet
+
+/*
+ * Fichier robots.txt pour le site Portfolio.
+ * Placé à la racine du site (ex: https://votre-domaine.com/robots.txt)
+ *
+ * UTILITÉ :
+ * - Indique aux robots des moteurs de recherche (Googlebot, Bingbot...) quelles pages ils peuvent ou ne peuvent pas explorer.
+ * - Empêche l'indexation des pages sensibles (ex: /admin, /api).
+ * - Améliore le SEO en guidant les crawlers vers les pages importantes.
+ *
+ * OÙ LE METTRE ?
+ * À la racine de votre site, accessible via : https://votre-domaine.com/robots.txt
+ * Sur Infomaniak : dans le dossier public_html/ ou à la racine de votre hébergement.
+ */
+
+# Autorise tous les robots à explorer le site
+User-agent: *
+
+# Autorise l'indexation de toutes les pages sauf celles listées ci-dessous
+Allow: /
+
+# Interdit l'indexation des pages suivantes
+Disallow: /admin
+Disallow: /api
+Disallow: /login
+
+# Sitemap : indique l'emplacement du sitemap.xml
+Sitemap: https://votre-domaine.com/sitemap.xml
+
+
+ET SITEMPAP.XML 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!--
+    Fichier sitemap.xml pour le site Portfolio.
+    À placer à la racine du site : https://votre-domaine.com/sitemap.xml
+
+    UTILITÉ :
+    - Aide les moteurs de recherche à découvrir toutes les pages de votre site.
+    - Indique la fréquence de mise à jour et l'importance relative des pages.
+    - Améliore l'indexation et le référencement (SEO).
+
+    OÙ LE METTRE ?
+    À la racine de votre site, accessible via : https://votre-domaine.com/sitemap.xml
+    Sur Infomaniak : dans le dossier public_html/ ou à la racine de votre hébergement.
+  -->
+
+  <!-- Page d'accueil (priorité maximale) -->
+  <url>
+    <loc>https://votre-domaine.com/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Sections principales (priorité élevée) -->
+  <url>
+    <loc>https://votre-domaine.com/#apropos</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://votre-domaine.com/#activites</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://votre-domaine.com/#portfolio</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://votre-domaine.com/#process</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://votre-domaine.com/#contact</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Images importantes (pour l'indexation des images) -->
+  <url>
+    <loc>https://votre-domaine.com/img/og-image.jpg</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
+
+
+POUR INFOMANIAK, créer un .htaccess (redirection SPA et sécurité)
+
+# =============================================
+# Fichier .htaccess pour Infomaniak
+# À placer à la racine de votre hébergement
+# =============================================
+
+# 1. ACTIVER LA REÉCRITURE D'URL
+RewriteEngine On
+
+# 2. REDIRIGER TOUTES LES REQUÊTES VERS index.html (pour les SPA comme React)
+#    Sauf pour :
+#    - Les fichiers existants (images, CSS, JS, etc.)
+#    - Les requêtes API (vers /api)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/api [NC]
+RewriteRule ^ index.html [L]
+
+# 3. SÉCURITÉ : BLOQUER L'ACCÈS AUX FICHIERS SENSIBLES
+<FilesMatch "\.(env|htaccess|htpasswd|ini|log|sh|sql)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# 4. SÉCURITÉ : DÉSACTIVER LE LISTING DES DOSSIERS
+Options -Indexes
+
+# 5. CACHE : OPTIMISER LE CACHE POUR LES ASSETS STATIQUES
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# 6. COMPRESSION GZIP
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/x-javascript
+</IfModule>
+
+# 7. TYPES MIME POUR WEBP
+AddType image/webp .webp
+
+# 8. HEADERS DE SÉCURITÉ
+<IfModule mod_headers.c>
+  Header set X-Frame-Options "DENY"
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-XSS-Protection "1; mode=block"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://votre-domaine.com;"
+  Header set Feature-Policy "geolocation 'none'; microphone 'none'; camera 'none'; payment 'none'; usb 'none'"
+</IfModule>
+
+
+
+
+
+
+
+
+
+MESURES DE SÉCURITÉ APPLIQUÉES SUR CE PORTFOLIO :
+
+# 🔒 Mesures de Sécurité Appliquées - Portfolio
+
+## 📌 **Backend (Node.js/Express)**
+
+### 1. **Authentification et Autorisation**
+- ✅ **JWT (JSON Web Tokens)** :
+  - Tokens signés avec une clé secrète (`JWT_SECRET` dans `.env`).
+  - Expiration après 2 heures (`expiresIn: '2h'`).
+  - Middleware `auth` pour protéger les routes sensibles (`/api/projects`, `/api/contact`).
+  - Vérification du rôle (`admin`) pour les actions critiques.
+
+- ✅ **Stockage sécurisé des identifiants** :
+  - `ADMIN_ID` et `ADMIN_PASSWORD` dans `.env` (jamais en dur dans le code).
+  - `.env` dans `.gitignore` pour éviter les fuites.
+
+---
+
+### 2. **Protection contre les attaques courantes**
+
+- ✅ **CORS (Cross-Origin Resource Sharing)** :
+  - Restreint aux origines autorisées (`FRONTEND_URL` dans `.env`).
+  - Méthodes autorisées : `GET`, `POST`, `PUT`.
+  - Headers autorisés : `Content-Type`, `Authorization`.
+
+- ✅ **Limite de taille des requêtes** :
+  - `express.json({ limit: '10mb' })` pour éviter les attaques DoS via des payloads trop gros.
+
+- ✅ **Uploads de fichiers sécurisés** :
+  - **Multer** :
+    - Filtre MIME type : seules les images (`image/*`) sont acceptées.
+    - Limite de taille : 5 Mo par fichier, 10 fichiers max par requête.
+    - Noms de fichiers uniques (timestamp + random) pour éviter les collisions.
+  - **Sharp** :
+    - Redimensionnement des images à 80% de leur taille originale.
+    - Conversion en **WebP** (format moderne, plus léger).
+    - Qualité réduite à **80%** pour optimiser la taille sans perte visible.
+    - Suppression des fichiers temporaires après traitement.
+
+- ✅ **Headers de sécurité** (via `.htaccess` pour Infomaniak) :
+  - `X-Frame-Options: DENY` → Empêche l'inclusion dans des iframes (clickjacking).
+  - `X-Content-Type-Options: nosniff` → Empêche le MIME sniffing.
+  - `X-XSS-Protection: 1; mode=block` → Active la protection XSS du navigateur.
+  - `Strict-Transport-Security` (HSTS) → Force HTTPS pendant 1 an.
+  - `Referrer-Policy: strict-origin-when-cross-origin` → Limite les informations envoyées dans le header Referer.
+  - `Content-Security-Policy` (CSP) → Restreint les sources autorisées pour les scripts, styles, images, etc.
+
+---
+
+### 3. **Gestion des erreurs**
+- ✅ **Middleware `errorHandler`** :
+  - Centralisation de la gestion des erreurs.
+  - Ne renvoie **jamais** les détails des erreurs en production (seulement en développement).
+  - Pour `/api/projects` et `/api/testimonies` : renvoie un tableau vide (`[]`) pour éviter les erreurs côté front (`TypeError: projects.filter is not a function`).
+
+- ✅ **Validation des inputs** :
+  - Vérification de la présence des champs obligatoires (ex: `name`, `email`, `message` pour le contact).
+  - Vérification de l'existence des projets avant mise à jour (`PUT /api/projects/:id`).
+
+---
+
+### 4. **Sécurité des fichiers**
+- ✅ **Permissions** :
+  - Le dossier `img/` (à la racine) a les permissions **755** (lecture/écriture pour le propriétaire, lecture/exécution pour les autres).
+  - Les fichiers sensibles (`.env`, `.htaccess`) sont **exclus du git** (via `.gitignore`).
+
+- ✅ **Stockage des images** :
+  - Les images uploadées sont stockées dans `img/` **à la racine** (pas dans `backend/`).
+  - Noms de fichiers uniques pour éviter les écrasements.
+  - Conversion en **WebP** pour réduire la taille et améliorer les performances.
+
+---
+---
+
+## 🌐 **Frontend (React)**
+
+### 1. **Stockage des tokens**
+- ✅ **localStorage** :
+  - Le token JWT est stocké dans `localStorage` après connexion.
+  - Supprimé à la déconnexion.
+  - **Attention** : `localStorage` est vulnérable aux attaques XSS. Pour un site sensible, utiliser `httpOnly` cookies + CSRF tokens.
+
+### 2. **Requêtes API sécurisées**
+- ✅ **Headers d'autorisation** :
+  - Le token JWT est envoyé dans le header `Authorization: Bearer <token>`.
+  - Utilisation de `fetch` avec les headers appropriés.
+
+- ✅ **Gestion des erreurs** :
+  - Vérification du status HTTP (`res.ok`).
+  - Affichage de messages d'erreur génériques (pas de détails sensibles).
+
+### 3. **Accessibilité (a11y)**
+- ✅ **Balises ARIA** :
+  - `aria-label` sur tous les boutons et icônes.
+  - `aria-modal="true"` sur les modales.
+  - `role="dialog"` pour les modales.
+  - `aria-hidden="true"` pour les éléments décoratifs (icônes FontAwesome).
+
+- ✅ **Navigation clavier** :
+  - `tabIndex` sur les éléments interactifs.
+  - Gestion des événements `onKeyDown` pour les actions au clavier (ex: touche Entrée pour valider).
+
+- ✅ **Images** :
+  - Balises `alt` descriptives sur toutes les images.
+  - `loading="lazy"` pour le lazy loading (améliore les performances).
+
+---
+---
+
+## 🚀 **Infomaniak (Hébergement)**
+
+### 1. **Configuration du serveur**
+- ✅ **HTTPS** :
+  - Activer le certificat SSL/TLS (gratuit via Let's Encrypt sur Infomaniak).
+  - Redirection HTTP → HTTPS dans `.htaccess`.
+
+- ✅ **Fichiers statiques** :
+  - Le dossier `img/` (à la racine) est accessible via `/img/`.
+  - Le dossier `public/` (frontend) contient les assets statiques (CSS, JS, images du front).
+
+- ✅ **SPA (Single Page Application)** :
+  - Configuration de `.htaccess` pour rediriger toutes les requêtes vers `index.html` (sauf pour les fichiers existants et `/api`).
+
+### 2. **Sécurité Infomaniak**
+- ✅ **Firewall** :
+  - Activer le firewall Infomaniak (disponible dans le panneau de contrôle).
+  - Bloquer les IP suspectes.
+
+- ✅ **Sauvegardes** :
+  - Configurer des sauvegardes automatiques quotidiennes.
+  - Tester régulièrement la restauration.
+
+- ✅ **Mises à jour** :
+  - Garder Node.js et les dépendances à jour (`npm audit` régulièrement).
+
+- ✅ **Surveillance** :
+  - Activer les alertes pour les tentatives de connexion suspectes.
+  - Vérifier les logs d'accès (`/stats/awstats/` dans Infomaniak).
+
+---
+---
+
+## 📋 **Checklist de Sécurité**
+   **Catégorie**               | **Mesure**                          | **Statut** | **Vérification**                          |
+ |----------------------------|------------------------------------|------------|------------------------------------------|
+ | Authentification           | JWT avec expiration                | ✅         | Vérifier `.env` et `authController.js`    |
+ | Uploads                    | Filtre MIME + limite taille         | ✅         | Vérifier `upload.js`                     |
+ | CORS                       | Restreint au frontend               | ✅         | Vérifier `app.js`                         |
+ | Headers de sécurité         | X-Frame-Options, CSP, etc.          | ✅         | Vérifier `.htaccess`                     |
+ | Gestion des erreurs         | Pas de détails en production        | ✅         | Vérifier `errorHandler.js`               |
+ | Stockage des secrets        | `.env` + `.gitignore`              | ✅         | Vérifier `.gitignore`                     |
+ | Permissions des fichiers    | 755 pour `img/`, 644 pour les fichiers | ✅      | Vérifier avec `ls -l`                     |
+ | HTTPS                      | Certificat SSL activé               | ✅         | Vérifier dans le panneau Infomaniak      |
+ | Sauvegardes                | Automatiques et testées             | ⚠️        | À configurer dans Infomaniak             |
+ | Mises à jour               | Régulières (Node.js, npm)           | ⚠️        | Lancer `npm audit` régulièrement         |
+
+---
+---
+
+## 🛡️ **Recommandations Supplémentaires**
+
+1. **Pour un site en production** :
+   - Utiliser un **reverse proxy** (Nginx) devant Node.js pour :
+     - Gérer le HTTPS.
+     - Limiter les requêtes (rate limiting).
+     - Bloquer les attaques DDoS.
+   - Exemple de configuration Nginx :
+     ```nginx
+     server {
+         listen 443 ssl;
+         server_name votre-domaine.com;
+
+         ssl_certificate /path/vers/certificat.crt;
+         ssl_certificate_key /path/vers/cle_privee.key;
+
+         location / {
+             proxy_pass http://localhost:3001;
+             proxy_http_version 1.1;
+             proxy_set_header Upgrade \$http_upgrade;
+             proxy_set_header Connection 'upgrade';
+             proxy_set_header Host \$host;
+             proxy_cache_bypass \$http_upgrade;
+         }
+
+         location /img/ {
+             root /chemin/vers/le/projet/;
+             expires 1y;
+             add_header Cache-Control "public";
+         }
+     }
+     ```
+
+2. **Monitoring** :
+   - Utiliser **Sentry** ou **LogRocket** pour surveiller les erreurs frontend/backend.
+   - Configurer des alertes pour les erreurs critiques.
+
+3. **Tests de sécurité** :
+   - Effectuer des tests avec **OWASP ZAP** ou **Burp Suite**.
+   - Vérifier les vulnérabilités avec `npm audit`.
+
+4. **Bonnes pratiques** :
+   - Ne **jamais** commiter de secrets dans Git (utiliser `.gitignore`).
+   - Utiliser des **variables d'environnement** pour tout ce qui est sensible.
+   - Mettre à jour **régulièrement** les dépendances (`npm update`).
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SITE CLAIRE
+
+🗺️ Créer votre Google Business Profile
+
+Guide pas-à-pas pour l'association Le Grain de Sel Hors-les-Murs — environ 20 minutes.
+Pourquoi c'est la priorité n°1 ?
+Quand quelqu'un cherche "association solidarité Grenoble" ou "aide précarité Grenoble" sur Google ou Maps, votre fiche apparaît dans le bloc cartographique (3 premiers résultats locaux). C'est gratuit, permanent, et visible avant même les sites web.
+1
+Ouvrir Google Business Profile
+
+Rendez-vous sur business.google.com et cliquez sur "Gérer maintenant". Connectez-vous avec le compte Google de l'association (ou créez-en un).
+💡 Conseil : Utilisez une adresse Gmail dédiée à l'association (ex: graindesel.grenoble@gmail.com) plutôt qu'un compte personnel.
+2
+Rechercher si la fiche existe déjà
+
+Tapez "Le Grain de Sel Hors-les-Murs" dans le champ de recherche. Si une fiche apparaît, cliquez "Demander la propriété". Sinon, cliquez "Ajouter votre entreprise".
+3
+Renseigner les informations principales
+
+    Nom : Le Grain de Sel Hors-les-Murs
+    Catégorie principale : "Association à but non lucratif" ou "Organisation caritative"
+    Adresse : 16, rue Ponsard – 38100 Grenoble
+    Téléphone : votre numéro
+    Site web : https://www.graindesel.netlify.app
+    Horaires : ajoutez les horaires d'accueil du public si vous en avez
+
+4
+Vérifier la fiche (étape obligatoire)
+
+Google doit confirmer que vous êtes bien à cette adresse. Plusieurs options :
+
+    Par courrier postal — Google envoie un code à l'adresse (5–10 jours)
+    Par téléphone — un appel automatique avec un code (immédiat, si disponible)
+    Par e-mail — si proposé, c'est le plus rapide
+
+💡 Conseil : Si l'option téléphone ou e-mail apparaît, choisissez-la — le courrier peut mettre 2 semaines.
+5
+Compléter le profil après vérification
+
+Un profil complet est jusqu'à 7× plus susceptible d'être trouvé. À renseigner :
+
+    Description (750 caractères max) — copiez-collez celle-ci :
+
+Depuis 2009, l'association Le Grain de Sel Hors-les-Murs accompagne gratuitement et sans jugement les adultes en grande précarité à Grenoble : personnes à la rue, addictions, solitude et exclusion sociale. Nos actions : aide alimentaire, accès aux soins, soutien administratif, activités culturelles et bénévolat de proximité. Association Loi 1901 reconnue d'intérêt général.
+
+    Photos : ajoutez au minimum le logo, une photo de l'équipe, une photo des locaux ou d'une action
+    Catégories secondaires : "Service social", "Aide alimentaire", "Accompagnement social"
+    Attributs : cochez "Accès handicapé", "Gratuit", etc. si pertinent
+    Lien de dons : ajoutez le lien HelloAsso dans "Liens"
+
+6
+Ajouter le sitemap à Google Search Console (bonus)
+
+Allez sur search.google.com/search-console, ajoutez votre domaine, puis soumettez votre sitemap : https://www.graindesel.netlify.app/sitemap.xml
+💡 Ça indique à Google d'indexer le site rapidement. Gratuit, 5 minutes.
+✅ Ce qui booste votre fiche ensuite (5 min/mois)
+
+    Publiez une actualité mensuelle (événement, action, appel aux dons) depuis Business Profile — ça remonte votre fiche
+    Répondez aux avis, même courts — ça signale que la fiche est active
+    Demandez gentiment aux bénévoles et partenaires de laisser un avis Google
+    Ajoutez des photos régulièrement (Google valorise les fiches vivantes)
+
+→ Ouvrir Google Business Profile 
+https://business.google.com/fr/business-profile/?ppsrc=GPDA2
+
+

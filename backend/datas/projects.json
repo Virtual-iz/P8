@@ -1,0 +1,360 @@
+[
+  {
+    "id": "kasa_site-location-entre-particuliers",
+    "title": "Site de location entre particuliers",
+    "p1": "Developpement FrontEnd à partir de la maquette de Kasa, entreprise de location d’appartements et maisons entre particuliers.",
+    "cover": "React_Kasa-appart-responsive.png",
+    "pictures": [
+      "React_Kasa-appart-responsive.png",
+      "React_Kasa-code.png",
+      "React_Kasa-code_fondgris.png",
+      "React_Kasa-data-drop-details",
+      "React_Kasa-load-data.png",
+      "React_Kasa-reusable-component.png"
+    ],
+    "demo": "https://kasa.virtualiz.com",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "Kasa souhaitait développer un site correspondant aux besoins de locations entre particuliers, avec une interface conviviale et une expérience utilisateur fluide."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "Particulièrement responsive, le site de Kasa requierait une précision particulière pour que les éléments s'adaptent parfaitement à tous les types d'écrans, tout en conservant une esthétique cohérente."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "Une structure React permettait de créer des composants réutilisables et de gérer efficacement l'état de l'application, facilitant ainsi le développement d'une interface utilisateur dynamique et responsive."
+    ],
+    "filtres": [
+      "front"
+    ],
+    "tags": [
+      "HTML5",
+      "Scss",
+      "React",
+      "JS"
+    ]
+  },
+  {
+    "id": "api-site-de-notation-de-livres-vieux-grimoire",
+    "title": "API et database d'un site de livres",
+    "p1": "Developpement backend d’une API pour Le vieux grimoire, afin de partager et noter ses livres favoris avec un compte utilisateur. Opérations CRUD sécurisées et Base de données.",
+    "cover": "Backend_grimoires-without-back.png",
+    "pictures": [
+      "Backend_grimoires-without-back.png",
+      "Backend_grimoires -token.png",
+      "Backend_grimoires-add.png",
+      "Backend_grimoires-book-data.png",
+      "Backend_grimoires-code.png",
+      "Backend_grimoires-database.png",
+      "Backend_grimoires-database-nosql-mongodb.png",
+      "Backend_grimoires-login.png",
+      "Backend_grimoires-maquette.png",
+      "Backend_grimoires-modifications.png",
+      "Backend_grimoires-routes.png",
+      "Backend_grimoires-structure.png"
+    ],
+    "demo": "https://grimoires.virtualiz.com",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "Le projet avait pour objectif de créer une API sécurisée pour permettre aux utilisateurs de partager et noter leurs livres favoris, avec des opérations CRUD et une base de données pour stocker les informations."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "La sécurisation de l'API et la gestion des opérations CRUD étaient des défis majeurs, nécessitant une attention particulière à la validation des données et à la protection contre les attaques potentielles."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "J'ai utilisé des outils et des pratiques de développement sécurisées pour créer une API robuste, avec une gestion efficace des opérations CRUD et une base de données bien structurée pour stocker les informations des utilisateurs et des livres."
+    ],
+    "filtres": [
+      "back"
+    ],
+    "tags": [
+      "HTML5",
+      "Scss",
+      "React",
+      "JS",
+      "API REST",
+      "Node",
+      "Express",
+      "MongoDB",
+      "Mongoose"
+    ]
+  },
+  {
+    "id": "seo-et-correctifs-site-portfolio-existant",
+    "title": "Amélioration SEO et correctifs",
+    "p1": "Amélioration du site porfolio de Nina Carducci, résolution de bugs, accessibilité avec Wave et Lighthouse, travail sur le SEO pour le référencement",
+    "cover": "SEO_carducci-wave-apres.png",
+    "pictures": [
+      "SEO_carducci-wave-apres.png",
+      "SEO_carducci-lighthouse.png",
+      "SEO_carducci-wave.png",
+      "SEO_carducci-site.png"
+    ],
+    "demo": "https://ninac.virtualiz.com",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "Mettre à jour le site de Nina Carducci, corriger les bugs, améliorer l'accessibilité et le référencement pour une meilleure visibilité en ligne."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "Le site existant présentait des problèmes d'accessibilité et de référencement qui nécessitaient une analyse approfondie et des correctifs ciblés."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "Des correctifs ont été appliqués pour améliorer l'accessibilité et le référencement du site. Des outils comme Wave et Lighthouse ont été utilisés pour identifier et corriger les problèmes."
+    ],
+    "filtres": [
+      "front"
+    ],
+    "tags": [
+      "HTML5",
+      "CSS",
+      "JS",
+      "SEO",
+      "Lighthouse",
+      "Wave"
+    ]
+  },
+  {
+    "id": "site-wordpress-boulangerie-locale",
+    "title": "Site WP d’une boulangerie locale",
+    "p1": "Site wordpress répondant aux besoins de la boulangerie : pouvoir ajouter soi-même des images dans la galerie, viser une évolution de vente en ligne",
+    "cover": "boulangerieGrainedAlice.jpg",
+    "pictures": [
+      "boulangerieGrainedAlice.jpg"
+    ],
+    "demo": "https://grainedalice.fr",
+    "title2": "Objectifs du projet",
+    "p2": [
+      ""
+    ],
+    "title3": "Défis",
+    "p3": [
+      ""
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      ""
+    ],
+    "filtres": [
+      "webdesign",
+      "front"
+    ],
+    "tags": [
+      "HTML5",
+      "CSS",
+      "Jquery",
+      "Wordpress"
+    ]
+  },
+  {
+    "id": "site-minimaliste-pour-association",
+    "title": "Site minimaliste pour l'association Grain de Sel",
+    "p1": "L'association Grain de Sel, hors les murs, souhaitait avoir un minimum de visibilité en ligne, avec un site simple, présentant les activités de l’association et les moyens de contact",
+    "cover": "Graindesel.png",
+    "pictures": [
+      "Graindesel.png"
+    ],
+    "demo": "https://graindesel.vercel.app",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "Obtenir de la visibilité en ligne, présenter les activités de l’association et recruter de nouveaux bénévoles étaient les objectifs principaux du projet."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "L'association est constituée de bénévoles, et n'avait que très peu de budget à consacrer à la création d'un site. Nous avons donc opté pour une solution simple avec un site onepage hébergé gratuitement sur Vercel."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "La solution d'un site onepage épuré, très simple à mettre en place, respectaient les contraintes. "
+    ],
+    "filtres": [
+      "front"
+    ],
+    "tags": [
+      "HTML5",
+      "CSS",
+      "JS",
+      "Vercel"
+    ]
+  },
+  {
+    "id": "phototheque-wordpress-pour-une-photographe",
+    "title": "Photothèque WordPress",
+    "p1": "Création d'une photothèque pour des archives photographiques assez conséquentes.",
+    "cover": "PhotographerPortfolio.png",
+    "pictures": [
+      "PhotographerPortfolio.png"
+    ],
+    "demo": "https://isabellezezima.com",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "L'apport régulier de nouvelles photographies nécessitait une solution simple et efficace avec une interface administrateur facile à utiliser sans avoir à passer par un ftp."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "Il fallait également s'assurer que le site puisse présenter correctement des formats de photographies variés, soit responsive et fonctionne bien sur tous les appareils."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "Le thème a été selectionné en cohérence avec les besoins. Des plugins ont été utilisés pour optimiser la gestion de la photothèque et l'affichage des images."
+    ],
+    "filtres": [
+      "webdesign",
+      "front",
+      "back"
+    ],
+    "tags": [
+      "HTML5",
+      "CSS",
+      "Wordpress",
+      "Jquery"
+    ]
+  },
+  {
+    "id": "site-portfolio-Julien-mediateur",
+    "title": "Site portfolio pour un médiateur",
+    "p1": "Création d'un site portfolio pour un médiateur, mettant en avant ses compétences, ses expériences et ses réalisations dans le domaine de la médiation.",
+    "cover": "mediateurCapture.png",
+    "pictures": [
+      "mediateurAccueil.png",
+      "mediateurApropos.png",
+      "mediateurServices.png",
+      "mediateurContact.png"
+    ],
+    "demo": "https://julieniemmolo.com",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "Permettre au médiateur de présenter ses valeurs et services de manière professionnelle et attrayante."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "Il fallait créer un design qui reflète la personnalité du médiateur tout en restant professionnel, et s'assurer que le site soit facile à naviguer pour les visiteurs."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "Le design a été conçu pour être à la fois professionnel et accueillant, avec une navigation intuitive pour permettre aux visiteurs de trouver facilement les informations qu'ils recherchent."
+    ],
+    "filtres": [
+      "webdesign",
+      "front",
+      "back"
+    ],
+    "tags": [
+      "HTML5",
+      "Scss",
+      "React",
+      "JS",
+      "Claude IA"
+    ]
+  },
+  {
+    "id": "immersion-em-site-informatif-complexe-sur-une-maladie-invalidante",
+    "title": "Site d'information sur une maladie invalidante",
+    "p1": "Développement d'un site informatif complexe sur l'Encéphalomyélite Myalgique, maladie invalidante, destiné à sensibiliser le public et fournir des informations précises et fiables.",
+    "cover": "ImmersionEM-capture-accueil.png",
+    "pictures": [
+      "ImmersionEM-capture-accueil.png"
+    ],
+    "demo": "https://immersion-em.com",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "Le site avait pour objectif de sensibiliser le public à la maladie, de fournir des informations précises et fiables. "
+    ],
+    "title3": "Défis",
+    "p3": [
+      "La complexité des informations à présenter a fait de la maquette un véritable défi pour conserver la richesse du contenu tout en assurant une clarté pour les visiteurs."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "Une structure claire et une hiérarchisation du contenu ont été mises en place pour permettre aux visiteurs de naviguer facilement à travers les différentes sections du site et de trouver les informations qu'ils recherchent. De nombreuses référeces ont été rajoutées."
+    ],
+    "filtres": [
+      "webdesign",
+      "front",
+      "back"
+    ],
+    "tags": [
+      "HTML5",
+      "CSS",
+      "Scss",
+      "React",
+      "JS",
+      "SEO",
+      "MongoDB",
+      "Mongoose",
+      "Node",
+      "Express",
+      "API REST"
+    ]
+  },
+  {
+    "id": "flyer-pour-la-compagnie-de-danse-en-ka",
+    "title": "Flyer pour la compagnie de danse En Ka",
+    "p1": "Création d'un flyer pour la compagnie de danse En Ka, présentant globalement la compagnie au public et donnant les informations nécessaires pour les contacter ou assister à leurs spectacles.",
+    "cover": "EnKa-flyer1.jpg",
+    "pictures": [
+      "EnKa-flyer1.jpg",
+      "EnKa-flyer2.jpg"
+    ],
+    "demo": "",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "En Ka souhaitait un flyer basique mais élégant à distribuer en amont de leurs spectacles."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "Partant de rien, la compagnie avait besoin de définir entièrement son identité visuelle, et avoir également du contenu photographique pour illustrer le flyer."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "J'ai travaillé sur plusieurs tableaux avec la compagnie, pour leur constituer une base photographique, une video de présentation, leur identité visuelle, et le flyer lui même. Je les ai également guidé pour la commande de l'impression papier."
+    ],
+    "filtres": [
+      "photo",
+      "imprime"
+    ],
+    "tags": [
+      "photo",
+      "retouche d'image",
+      "mise en page",
+      "communication visuelle"
+    ]
+  },
+  {
+    "id": "photographies-culinaires-pour-bridor",
+    "title": "Photographies culinaires pour Bridor",
+    "p1": "Création de photographies culinaires pour la marque Bridor, mettant en valeur leur ligne de produits.",
+    "cover": "Bridor1.jpg",
+    "pictures": [
+      "Bridor1.jpg",
+      "Bridor2.jpg",
+      "Bridor3.jpg",
+      "Bridor4.jpg",
+      "Bridor5.jpg"
+    ],
+    "title2": "Objectifs du projet",
+    "p2": [
+      "Bridor souhaitait mettre en valeur leurs produits dans des mises en scène originales et attrayantes pour leur communication visuelle."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "La conception du projet nécessitait une approche créative et une maîtrise technique."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "Avec l'aide d'un cuisiner qui préparait les produits, j'ai réalisé sur plans préalables une série de photographies culinaires, en travaillant sur la composition, l'éclairage et les angles de prise de vue pour proposer une série inédite."
+    ],
+    "filtres": [
+      "photo"
+    ],
+    "tags": [
+      "photo",
+      "retouche d'image",
+      "communication visuelle"
+    ]
+  }
+]

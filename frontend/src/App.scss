@@ -1,0 +1,147 @@
+:root {
+  --jaune-vif: #FDC435;
+  --vert-beige: #BCB398;
+  --vert-fonce: #1D3B38; //#1D3B38
+  --beige-clair: #DDD6C1;
+  --blanc-casse: #FDFDFD;
+  --noir-attenue: #1E1E1E;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  background-color: var(--beige-clair);
+  color: var(--noir-attenue);
+  overflow-x: hidden;
+}
+
+.notfound{
+  section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    padding: 15px;;
+    background-color: #FDC435;
+    color: #1E1E1E;
+    border-radius: 25px;
+    text-decoration: none;
+  }
+}
+
+
+
+
+h1 {font-size: 64px;}
+h2, h3 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+}
+h2 {
+  font-size: 42px;
+  color: var(--blanc-casse);
+  //text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+h3 {
+  font-size: 22px;
+  font-weight: bold;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+}
+
+.sectiontitle{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.yellowline{
+    width: 400px;
+    height: 4px;
+    background-color: var(--jaune-vif);
+}
+
+
+p{
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+
+li{
+  list-style-type: none;
+}
+
+svg {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+
+
+button {
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+main{
+  margin: 0 auto;
+  width: 100%;
+}
+
+// Section
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 50px;
+
+    @media (max-width: 768px) {
+      padding: 30px 15px;
+  }
+
+}
+
+// Grid de colonnes
+.grid {
+  display: grid;
+  gap: 20px;
+
+  &.col1 { grid-template-columns: 1fr; }
+  &.col2 { grid-template-columns: repeat(2, 1fr); }
+  &.col3 { grid-template-columns: repeat(3, 1fr); }
+
+  @media (max-width: 1024px) {
+    &.col3 { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    &.col2, &.col3 { grid-template-columns: 1fr; }
+
+  }
+
+  > * {
+    width: 100%; // très important pour que les enfants prennent toute la cellule
+  }
+}

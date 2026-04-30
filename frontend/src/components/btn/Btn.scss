@@ -1,0 +1,84 @@
+.btn {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  padding: 0 12px;
+  border: 2px solid var(--jaune-vif);
+  border-radius: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: var(--vert-fonce);
+  color: var(--blanc-casse);
+  transition: all 0.25s ease;
+
+  &.icon {
+    width: 45px;
+    padding: 0;
+    font-size: 18px;
+  }
+
+  &.text {
+    width: 100px;
+    font-size: 16px;
+    @media (max-width: 880px) {
+        width: 90px;
+        font-size: 14px;
+    }
+  }
+
+  &.active {
+    background-color: var(--jaune-vif);
+    color: var(--vert-fonce);
+    border-color: var(--vert-fonce);
+  }
+}
+
+// Bouton de validation
+.validate-btn {
+  width: 120px;
+  padding: 12px;
+  background-color: var(--jaune-vif);
+  color: var(--vert-fonce);
+  border: 2px solid var(--vert-fonce);
+  border-radius: 8px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateX(2px);
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    color: #666;
+    border-color: #999;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+// CV et linkedin ou autre réseau
+.social-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 6px;
+  background-color: var(--jaune-vif);
+  color: var(--noir-attenue);
+  transition: transform 0.3s ease;
+
+  svg {
+    font-size: 18px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

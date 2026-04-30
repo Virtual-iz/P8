@@ -1,0 +1,115 @@
+.projectcard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+  background: var(--beige-clair);
+  box-shadow: 0 4px 10px rgba(78, 78, 78, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+
+    p { font-size: 14px; }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 10px;
+    }
+  }
+}
+
+// Conteneur des boutons Détails + Modifier
+.card-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.openModal-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: nowrap;
+  width: 80px;
+  padding: 8px;
+  margin-bottom: 2px;
+  border-radius: 50px;
+  border: 1px solid var(--noir-attenue);
+  background: transparent;
+  color: var(--noir-attenue);
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--jaune-vif);
+    color: var(--vert-fonce);
+    border-color: var(--vert-fonce);
+    transform: translateX(5px);
+  }
+}
+
+// Bouton Modifier — visible uniquement en mode admin
+.edit-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 50px;
+  border: none;
+  color: var(--vert-fonce);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--jaune-vif);
+    color: var(--vert-fonce);
+  }
+}
+
+
+/* Style de la carte "Nouveau Projet" */
+.new-project-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px dashed var(--vert-fonce);
+  border-radius: 10px;
+  min-height: 200px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--jaune-vif);
+  }
+
+  .new-project-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: var(--vert-fonce);
+
+    .new-project-icon {
+      font-size: 30px;
+    }
+  }
+}

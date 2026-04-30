@@ -1,0 +1,62 @@
+// src/components/Testimony.scss
+.testimony {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: var(--vert-beige);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  &__avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    border : 1px solid black;
+    border-radius: 50%;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+    strong {
+      font-size: 18px;
+      font-weight: 600;
+    color: var(--noir-attenue);
+    }
+
+    span {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+
+  &__text {
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--noir-attenue);
+    margin: 0;
+  }
+}

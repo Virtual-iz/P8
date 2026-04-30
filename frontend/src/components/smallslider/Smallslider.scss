@@ -1,0 +1,62 @@
+.small-slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  border-top: 2px solid var(--noir-attenue);
+  border-bottom: 2px solid var(--noir-attenue);
+
+  &__track {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    gap: 20px; /* Espacement entre les témoignages */
+    //padding: 0 40px 0 40px;
+  }
+
+  &__slide {
+    flex: 0 0 calc(100% - 20px); /* Par défaut, un témoignage par ligne */
+    min-width: 0;
+    
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    opacity: 1; /* Tous les témoignages sont visibles par défaut */
+
+    @media screen and (min-width: 768px) {
+      flex: 0 0 calc(50% - 20px); /* Deux témoignages côte à côte sur tablette */
+    }
+
+    @media screen and (min-width: 1024px) {
+      flex: 0 0 calc(33.333% - 20px); /* Trois témoignages côte à côte sur desktop */
+    }
+  }
+
+  &__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--vert-beige);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 2;
+
+    &:hover {
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &--prev {
+      left: 10px;
+    }
+
+    &--next {
+      right: 10px;
+    }
+  }
+}
