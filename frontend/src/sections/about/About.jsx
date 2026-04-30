@@ -2,11 +2,6 @@ import './About.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbtack, faBriefcase, faEye, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 
-/**
- * Section "À propos" de la page d'accueil.
- * Présente les prestations et le parcours professionnel.
- * Note : Pas d'images à charger ici, donc pas de lazy loading nécessaire.
- */
 const About = () => {
     return (
         <section id="apropos">

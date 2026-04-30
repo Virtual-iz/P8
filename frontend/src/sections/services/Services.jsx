@@ -36,14 +36,14 @@ const Services = () => {
   return (
     <section id="activites" ref={sectionRef} aria-label="Compétences et services">
       <div className="sectiontitle">
-        <h2>ACTIVITÉS</h2>
+        <h2>COMPETENCES</h2>
         <div className="yellowline" aria-hidden="true"></div>
       </div>
 
       <div className="skills-container">
         {/* Frontend */}
         <article className="skills-list" aria-labelledby="frontend-title">
-          <h3 id="frontend-title" className="sr-only">Compétences Frontend</h3>
+          <h3 id="frontend-title" className="sr-only">Frontend</h3>
           <PercentRound value={75} icon={faCode} isVisible={isVisible} aria-label="Frontend : 75%" />
           <span>75%</span>
           <h4>Frontend</h4>
@@ -80,7 +80,7 @@ const Services = () => {
 
         {/* Backend */}
         <article className="skills-list" aria-labelledby="backend-title">
-          <h3 id="backend-title" className="sr-only">Compétences Backend</h3>
+          <h3 id="backend-title" className="sr-only">Backend</h3>
           <PercentRound value={62} icon={faServer} isVisible={isVisible} aria-label="Backend : 62%" />
           <span>62%</span>
           <h4>Backend</h4>
@@ -117,7 +117,7 @@ const Services = () => {
 
         {/* Communication Visuelle */}
         <article className="skills-list" aria-labelledby="comvis-title">
-          <h3 id="comvis-title" className="sr-only">Compétences Communication Visuelle</h3>
+          <h3 id="comvis-title" className="sr-only">Com Visuelle</h3>
           <PercentRound value={88} icon={faPalette} isVisible={isVisible} aria-label="Communication Visuelle : 88%" />
           <span>88%</span>
           <h4>Com Visuelle</h4>
@@ -161,7 +161,7 @@ const Services = () => {
 
         {/* Outils */}
         <article className="skills-list" aria-labelledby="tools-title">
-          <h3 id="tools-title" className="sr-only">Compétences Outils</h3>
+          <h3 id="tools-title" className="sr-only">Outils</h3>
           <PercentRound value={71} icon={faScrewdriverWrench} isVisible={isVisible} aria-label="Outils : 71%" />
           <span>71%</span>
           <h4>Outils</h4>

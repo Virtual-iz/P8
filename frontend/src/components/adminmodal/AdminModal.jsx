@@ -317,12 +317,12 @@ const AdminModal = ({ project, onClose, onSave, onDelete }) => {
                   onClick={() => onDelete(form.id)}
                   aria-label="Supprimer ce projet définitivement"
                 >
-                  <FontAwesomeIcon icon={faTrash} aria-hidden="true" /> Supprimer
+                  <FontAwesomeIcon icon={faTrash} aria-hidden="true" /> x
                 </button>
               )}
 
               <button type="submit" className="validate-btn" aria-label="Sauvegarder les modifications">
-                <FontAwesomeIcon icon={faSave} aria-hidden="true" /> Sauvegarder
+                <FontAwesomeIcon icon={faSave} aria-hidden="true" />Enregistrer
               </button>
             </div>
 

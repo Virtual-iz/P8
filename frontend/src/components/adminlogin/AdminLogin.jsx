@@ -17,11 +17,8 @@ const AdminLogin = ({ isOpen, onClose, onLogin }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  /**
-   * Gère la soumission du formulaire de connexion.
-   * API_URL inclut déjà /api, donc on n'ajoute pas /api dans le chemin.
-   * @param {Event} e - Événement de soumission
-   */
+  /*Gère la soumission du formulaire de connexion.
+   * @param {Event} e - Événement de soumission*/
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -67,10 +64,7 @@ const AdminLogin = ({ isOpen, onClose, onLogin }) => {
           ×
         </button>
 
-        <div className="admin-icon" aria-hidden="true">👤</div>
-
         <form onSubmit={handleSubmit} aria-labelledby="login-title">
-          <h2 id="login-title">Connexion Admin</h2>
 
           <div className="form-group">
             <label htmlFor="admin-id">Identifiant</label>

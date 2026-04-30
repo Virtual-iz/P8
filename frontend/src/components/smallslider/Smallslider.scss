@@ -6,12 +6,17 @@
   border-top: 2px solid var(--noir-attenue);
   border-bottom: 2px solid var(--noir-attenue);
 
+      background-image:
+    linear-gradient(rgba(221, 214, 193, 0.1), rgba(221, 214, 193, 0.08)),
+    url('../../assets/img/fond-beige-psyche.svg');
+    background-size: cover;
+    background-position: center;
+
   &__track {
     display: flex;
     transition: transform 0.5s ease;
     width: 100%;
     gap: 20px; /* Espacement entre les témoignages */
-    //padding: 0 40px 0 40px;
   }
 
   &__slide {
@@ -34,7 +39,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--vert-beige);
+    background: var(--vert-fonce);
+    color: var(--blanc-casse);
     border: none;
     width: 40px;
     height: 40px;
@@ -49,6 +55,7 @@
 
     &:hover {
       transform: translateY(-50%) scale(1.1);
+      border : 1px solid var(--jaune-vif);
     }
 
     &--prev {
