@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Btn from "../../components/btn/Btn";
 import { faHouse, faFingerprint, faBookOpen, faBriefcase, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import './NavBar.scss';
 
+// Seuil en dessous duquel les boutons texte ne tiennent plus (5 boutons ~420px de nav)
+const NARROW_BREAKPOINT = 600;
+
 const NavBar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [isHeader, setIsHeader] = useState(true);
+  const [isNarrow, setIsNarrow] = useState(window.innerWidth < NARROW_BREAKPOINT);
 
   const sections = [
-    { id: "home", text: "", icon: faHouse },
-    { id: "apropos", text: "A propos", icon: faFingerprint },
+    { id: "home",      text: "",          icon: faHouse },
+    { id: "apropos",   text: "A propos",  icon: faFingerprint },
     { id: "activites", text: "Activités", icon: faBriefcase },
     { id: "portfolio", text: "Portfolio", icon: faBookOpen },
-    { id: "contact", text: "", icon: faEnvelope },
+    { id: "contact",   text: "",          icon: faEnvelope },
   ];
 
   useEffect(() => {
@@ -30,8 +34,14 @@ const NavBar = () => {
       setActiveSection(current);
     };
 
+    const handleResize = () => setIsNarrow(window.innerWidth < NARROW_BREAKPOINT);
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -39,14 +49,15 @@ const NavBar = () => {
       {sections.map(sec => {
         const isActive = activeSection === sec.id;
 
-        // Dans le header, boutons = texte sauf home et contact
-        const showText = isHeader && sec.id !== "home" && sec.id !== "contact";
+        // Texte uniquement dans le header, sur écran large,
+        // et pour les sections qui ont un label (pas home ni contact)
+        const showText = isHeader && !isNarrow && sec.id !== "home" && sec.id !== "contact";
 
         return (
           <Btn
             key={sec.id}
             text={showText ? sec.text : ""}
-            icon={(!showText || sec.id === "home" || sec.id === "contact") ? sec.icon : null}
+            icon={!showText ? sec.icon : null}
             isActive={isActive}
             href={`#${sec.id}`}
           />

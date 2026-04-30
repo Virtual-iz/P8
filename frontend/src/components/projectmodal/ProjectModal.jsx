@@ -38,15 +38,18 @@ const ProjectModal = ({ project, onClose }) => {
             ))}
           </div>
 
-          <a
-            href={project.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="demo-btn"
-            aria-label={`Voir la démo du projet ${project.title}`}
-          >
-            Démo <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
-          </a>
+          {/* N'affiche le bouton que si une URL de démo est renseignée */}
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="demo-btn"
+              aria-label={`Voir la démo du projet ${project.title}`}
+            >
+              Démo <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
+            </a>
+          )}
         </article>
 
         <article className="modal-text grid col2">
