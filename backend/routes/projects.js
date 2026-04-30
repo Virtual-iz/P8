@@ -50,6 +50,21 @@ const processImage = async (file) => {
 };
 
 /**
+ * Supprime une liste de fichiers images du disque.
+ * Les erreurs sont loguées sans bloquer l'opération (fichier déjà absent, etc.).
+ */
+const deleteImageFiles = async (filenames) => {
+  for (const filename of filenames) {
+    try {
+      await fs.unlink(path.join(IMG_DIR, filename));
+      console.log(`🗑️ Image supprimée : ${filename}`);
+    } catch (err) {
+      console.warn(`⚠️ Impossible de supprimer ${filename} :`, err.message);
+    }
+  }
+};
+
+/**
  * POST /api/projects — crée un nouveau projet (admin uniquement).
  * Les images sont converties en WebP et stockées dans backend/img/.
  */
@@ -83,7 +98,8 @@ router.post('/', upload.array('images', 10), auth, async (req, res) => {
 
 /**
  * PUT /api/projects/:id — met à jour un projet existant (admin uniquement).
- * Les nouvelles images sont ajoutées aux images existantes.
+ * - Supprime du disque les images retirées de la liste (inspiré de books-ctrl.js)
+ * - Convertit et ajoute les nouvelles images uploadées
  */
 router.put('/:id', upload.array('images', 10), auth, async (req, res) => {
   try {
@@ -97,14 +113,22 @@ router.put('/:id', upload.array('images', 10), auth, async (req, res) => {
       return res.status(404).json({ message: 'Projet non trouvé' });
     }
 
+    const updatedData = JSON.parse(req.body.data);
+    const existingPictures = projects[index].pictures || [];
+    const keptPictures = updatedData.pictures || [];
+
+    // Détecte et supprime du disque les images retirées de la liste
+    const removedPictures = existingPictures.filter(pic => !keptPictures.includes(pic));
+    if (removedPictures.length > 0) {
+      await deleteImageFiles(removedPictures);
+    }
+
+    // Convertit et ajoute les nouvelles images uploadées
     const newImageFilenames = req.files?.length > 0
       ? await Promise.all(req.files.map(processImage))
       : [];
 
-    const updatedData = JSON.parse(req.body.data);
-    // updatedData.pictures contient la liste éditée dans AdminModal (textarea),
-    // on y ajoute les éventuelles nouvelles images uploadées
-    updatedData.pictures = [...(updatedData.pictures || []), ...newImageFilenames];
+    updatedData.pictures = [...keptPictures, ...newImageFilenames];
 
     projects[index] = { ...projects[index], ...updatedData };
     await fs.writeFile(PROJECTS_PATH, JSON.stringify(projects, null, 2));
@@ -112,6 +136,32 @@ router.put('/:id', upload.array('images', 10), auth, async (req, res) => {
   } catch (err) {
     console.error('❌ Erreur modification projet:', err);
     res.status(500).json({ message: 'Erreur modification projet: ' + err.message });
+  }
+});
+
+/**
+ * DELETE /api/projects/:id — supprime un projet et toutes ses images (admin uniquement).
+ */
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    const projects = JSON.parse(await fs.readFile(PROJECTS_PATH, 'utf-8'));
+    const index = projects.findIndex(p => p.id === req.params.id);
+    if (index === -1) {
+      return res.status(404).json({ message: 'Projet non trouvé' });
+    }
+
+    // Supprime toutes les images associées au projet
+    const allPictures = projects[index].pictures || [];
+    if (allPictures.length > 0) {
+      await deleteImageFiles(allPictures);
+    }
+
+    projects.splice(index, 1);
+    await fs.writeFile(PROJECTS_PATH, JSON.stringify(projects, null, 2));
+    res.json({ message: 'Projet supprimé' });
+  } catch (err) {
+    console.error('❌ Erreur suppression projet:', err);
+    res.status(500).json({ message: 'Erreur suppression projet: ' + err.message });
   }
 });
 

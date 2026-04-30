@@ -3,7 +3,7 @@ import './ProjectsGallery.scss';
 import ProjectCard from '../projectcard/ProjectCard';
 import ProjectModal from '../projectmodal/ProjectModal';
 import AdminModal from '../adminmodal/AdminModal';
-import { API_URL } from '../../config';  // ✅ Chemin corrigé : ../../config (depuis src/components/projectsgallery/)
+import { API_URL } from '../../config';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -26,9 +26,7 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
         if (!res.ok) throw new Error(`Erreur HTTP: ${res.status}`);
         return res.json();
       })
-      .then(data => {
-        setProjects(Array.isArray(data) ? data : []);
-      })
+      .then(data => setProjects(Array.isArray(data) ? data : []))
       .catch(err => {
         console.error('❌ Erreur chargement projets:', err);
         setProjects([]);
@@ -37,7 +35,7 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
   }, []);
 
   /** Sauvegarde un projet (création ou mise à jour) via l'API. */
-  const handleSave = async (updatedProject) => {
+  const handleSave = async (formData) => {
     const token = localStorage.getItem('admin_token');
     if (!token) {
       alert('Vous devez être connecté pour modifier un projet');
@@ -45,15 +43,15 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
     }
 
     try {
-      // updatedProject est toujours un FormData (cf. AdminModal)
-      const id = JSON.parse(updatedProject.get('data')).id;
+      // formData est toujours un FormData (cf. AdminModal)
+      const id = JSON.parse(formData.get('data')).id;
       const url = id ? `${API_URL}/projects/${id}` : `${API_URL}/projects`;
       const method = id ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
         method,
         headers: { 'Authorization': `Bearer ${token}` },
-        body: updatedProject,
+        body: formData,
       });
 
       if (!res.ok) throw new Error('Erreur sauvegarde');
@@ -70,6 +68,31 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
     } catch (err) {
       console.error('❌ Erreur sauvegarde:', err);
       alert('Erreur lors de la sauvegarde du projet');
+    }
+  };
+
+  /** Supprime un projet et toutes ses images via l'API. */
+  const handleDelete = async (projectId) => {
+    const token = localStorage.getItem('admin_token');
+    if (!token) return;
+
+    // Confirmation explicite avant suppression irréversible
+    if (!window.confirm('Supprimer ce projet définitivement ? Cette action est irréversible.')) return;
+
+    try {
+      const res = await fetch(`${API_URL}/projects/${projectId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+
+      if (!res.ok) throw new Error('Erreur suppression');
+
+      setProjects(prev => prev.filter(p => p.id !== projectId));
+      setEditingProject(null);
+      setSelectedProject(null);
+    } catch (err) {
+      console.error('❌ Erreur suppression:', err);
+      alert('Erreur lors de la suppression du projet');
     }
   };
 
@@ -138,6 +161,7 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
             setSelectedProject(null);
           }}
           onSave={handleSave}
+          onDelete={handleDelete}
         />
       )}
       {selectedProject && !editingProject && (
