@@ -15,23 +15,7 @@ const Filters = ({ onFilterChange, activeFilters }) => {
   ];
 
   const handleFilterClick = (filter) => {
-    const newFilters = new Set(activeFilters);
-
-    if (filter === 'all') {
-      newFilters.clear();
-      newFilters.add('all');
-    } else {
-      if (newFilters.has(filter)) {
-        newFilters.delete(filter);
-      } else {
-        newFilters.delete('all');
-        newFilters.add(filter);
-      }
-      if (newFilters.size === 0) {
-        newFilters.add('all');
-      }
-    }
-    onFilterChange(newFilters);
+    onFilterChange(new Set([filter === activeFilters.values().next().value ? 'all' : filter]));
   };
 
   const toggleMobileFilters = () => {

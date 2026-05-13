@@ -217,6 +217,25 @@ Dans le Manager Infomaniak :
 
 ---
 
+## Mettre à jour le site après une modification
+
+À chaque modification du frontend, il faut rebuilder et ré-uploader :
+
+```bash
+cd frontend
+npm run build
+```
+
+Puis sur Infomaniak, remplacez au minimum :
+- `index.html`
+- le dossier `assets/` entier (les noms de fichiers changent à chaque build)
+
+Le `.htaccess` et les fichiers statiques (`favicon`, `profil-pic`, etc.) n'ont pas besoin d'être ré-uploadés s'ils n'ont pas changé.
+
+Pour le backend (Railway), il suffit de pousser sur GitHub — Railway redéploie automatiquement.
+
+---
+
 ## Récapitulatif des commandes importantes
 
 ```bash
