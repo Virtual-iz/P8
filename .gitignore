@@ -10,6 +10,9 @@ frontend/.env.local
 frontend/.env.production.local
 frontend/dist/
 
+# ========== DOCS PRIVÉES ==========
+DEPLOIEMENT-INFOMANIAK.md
+
 # ========== LOGs et IDE ==========
 .DS_Store
 .idea/

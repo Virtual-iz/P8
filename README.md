@@ -116,11 +116,11 @@ JWT_SECRET=une_chaine_aleatoire_longue_et_complexe
 # SMTP (Infomaniak Mail ou autre)
 SMTP_HOST=mail.infomaniak.com
 SMTP_PORT=587
-SMTP_USER=contact@virtual-iz.fr
+SMTP_USER=contact@contact.fr
 SMTP_PASS=votre_mot_de_passe_smtp
 
 # Destinataire des messages de contact
-CONTACT_EMAIL=contact@virtual-iz.fr
+CONTACT_EMAIL=contact@contact.fr
 ```
 
 ### Frontend — `frontend/.env` (dev uniquement, non committé)
@@ -207,5 +207,4 @@ npm run dev          # Vite, port 5173 — ouvre automatiquement le navigateur
 
 - Les images uploadées via l'admin sont **automatiquement converties en WebP** (qualité 80%) par Sharp côté backend.
 - `backend/img/` n'est pas commité (gitignore). À sauvegarder manuellement lors d'un déploiement.
-- `backend/datas/projects-suite.json` est un fichier de données de secours — non utilisé en production, peut être supprimé.
-- Le frontend est un SPA : le serveur doit rediriger toutes les routes vers `index.html` (voir guide déploiement).
+- Le frontend est un SPA : le serveur doit rediriger toutes les routes vers `index.html` 

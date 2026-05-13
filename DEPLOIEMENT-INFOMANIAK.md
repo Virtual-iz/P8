@@ -143,13 +143,20 @@ Ce fichier dit au serveur Apache : "si le fichier demandé n'existe pas, renvoie
    PORT=3001
    ADMIN_ID=votre_identifiant
    ADMIN_PASSWORD=votre_mot_de_passe
-   JWT_SECRET=une_longue_chaine_aleatoire_unique
+   JWT_SECRET=une_longue_chaine_aleatoire_unique  ← générez-la avec la commande ci-dessous
    SMTP_HOST=mail.infomaniak.com
    SMTP_PORT=587
    SMTP_USER=contact@virtual-iz.fr
    SMTP_PASS=votre_mot_de_passe_smtp
    CONTACT_EMAIL=contact@virtual-iz.fr
    ```
+
+   **Générer le JWT_SECRET** — dans un terminal (Node.js requis) :
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+   ```
+   Copiez la chaîne générée (128 caractères) comme valeur de `JWT_SECRET`.
+
 6. Démarrez l'application via l'interface Infomaniak ou :
    ```bash
    npm start
