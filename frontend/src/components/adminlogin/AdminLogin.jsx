@@ -2,23 +2,14 @@ import { useState } from 'react';
 import './AdminLogin.scss';
 import Input from '../form/Input';
 import ValidateBtn from '../btn/ValidateBtn';
-import { API_URL } from '../../config';  // ✅ Chemin corrigé : ../../config (depuis src/components/adminlogin/)
+import { API_URL } from '../../config';
 
-/**
- * Composant AdminLogin.
- * Modale de connexion pour les administrateurs.
- * @param {boolean} isOpen - État d'ouverture de la modale
- * @param {Function} onClose - Fonction pour fermer la modale
- * @param {Function} onLogin - Fonction pour gérer la connexion réussie (remonte le token)
- */
 const AdminLogin = ({ isOpen, onClose, onLogin }) => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  /*Gère la soumission du formulaire de connexion.
-   * @param {Event} e - Événement de soumission*/
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

@@ -12,6 +12,19 @@ const PROJECTS_PATH = path.join(__dirname, '../datas/projects.json');
 // __dirname = backend/routes/ → ../img/ = backend/img/
 const IMG_DIR = path.join(__dirname, '../img/');
 
+/** SECURITÉ : valide une URL de projet (champ "demo") pour éviter les injections malveillantes.
+ * @returns {boolean}
+ */
+const isValidDemoUrl = (url) => {
+  if (!url || url.trim() === '') return true;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+};
+
 /** GET /api/projects — renvoie la liste de tous les projets. */
 router.get('/', async (req, res) => {
   try {
@@ -68,23 +81,30 @@ const deleteImageFiles = async (filenames) => {
  * POST /api/projects — crée un nouveau projet (admin uniquement).
  * Les images sont converties en WebP et stockées dans backend/img/.
  */
-router.post('/', upload.array('images', 10), auth, async (req, res) => {
+router.post('/', auth, upload.array('images', 10), async (req, res) => {
   try {
     if (!req.body.data) {
       return res.status(400).json({ message: 'Données du projet manquantes' });
     }
 
-    const projects = JSON.parse(await fs.readFile(PROJECTS_PATH, 'utf-8'));
     const projectData = JSON.parse(req.body.data);
+
+    if (!isValidDemoUrl(projectData.demo)) {
+      return res.status(400).json({ message: 'URL de démo invalide (doit commencer par http:// ou https://)' });
+    }
+
+    const projects = JSON.parse(await fs.readFile(PROJECTS_PATH, 'utf-8'));
 
     const imageFilenames = req.files?.length > 0
       ? await Promise.all(req.files.map(processImage))
       : [];
 
+    const allPictures = imageFilenames.length > 0 ? imageFilenames : (projectData.pictures || []);
     const newProject = {
-      id: `${Date.now()}-${Math.floor(Math.random() * 10000)}`,
       ...projectData,
-      pictures: imageFilenames.length > 0 ? imageFilenames : (projectData.pictures || [])
+      id: `${Date.now()}-${Math.floor(Math.random() * 10000)}`,
+      pictures: allPictures,
+      cover: projectData.cover || allPictures[0] || '',
     };
 
     projects.push(newProject);
@@ -101,10 +121,16 @@ router.post('/', upload.array('images', 10), auth, async (req, res) => {
  * - Supprime du disque les images retirées de la liste (inspiré de books-ctrl.js)
  * - Convertit et ajoute les nouvelles images uploadées
  */
-router.put('/:id', upload.array('images', 10), auth, async (req, res) => {
+router.put('/:id', auth, upload.array('images', 10), async (req, res) => {
   try {
     if (!req.body.data) {
       return res.status(400).json({ message: 'Données du projet manquantes' });
+    }
+
+    const updatedData = JSON.parse(req.body.data);
+
+    if (!isValidDemoUrl(updatedData.demo)) {
+      return res.status(400).json({ message: 'URL de démo invalide (doit commencer par http:// ou https://)' });
     }
 
     const projects = JSON.parse(await fs.readFile(PROJECTS_PATH, 'utf-8'));
@@ -113,7 +139,6 @@ router.put('/:id', upload.array('images', 10), auth, async (req, res) => {
       return res.status(404).json({ message: 'Projet non trouvé' });
     }
 
-    const updatedData = JSON.parse(req.body.data);
     const existingPictures = projects[index].pictures || [];
     const keptPictures = updatedData.pictures || [];
 
@@ -129,6 +154,7 @@ router.put('/:id', upload.array('images', 10), auth, async (req, res) => {
       : [];
 
     updatedData.pictures = [...keptPictures, ...newImageFilenames];
+    if (!updatedData.cover) updatedData.cover = updatedData.pictures[0] || '';
 
     projects[index] = { ...projects[index], ...updatedData };
     await fs.writeFile(PROJECTS_PATH, JSON.stringify(projects, null, 2));

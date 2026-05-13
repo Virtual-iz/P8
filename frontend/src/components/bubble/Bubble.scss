@@ -66,6 +66,50 @@
       animation: gear-spin-reverse 25s linear infinite;
     }
   }
+
+  @media (max-width: 770px) {
+    width: 180px;
+    height: 180px;
+    margin: 18px;
+    padding: 18px;
+
+    &__gear {
+      width: 228px;
+      height: 228px;
+    }
+
+    &__icon {
+      font-size: 30px;
+    }
+
+    p {
+      font-size: 13px;
+      max-width: 150px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    width: 160px;
+    height: 160px;
+    margin: 12px;
+    padding: 14px;
+
+    &__gear {
+      width: 202px;
+      height: 202px;
+    }
+
+    &__icon {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 11px;
+      max-width: 110px;
+      padding: 4px;
+    }
+  }
 }
 
 /*rotations lentes*/

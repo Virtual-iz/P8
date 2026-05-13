@@ -21,51 +21,84 @@
   padding: 0; // colle carrousel
   position: relative;
 
-  .modal-top{
+  .modal-top {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 30px 0px 30px;
+    margin: 10px 30px 0 30px;
+    gap: 8px;
 
-    .tags-container{
+    .tags-container {
       display: flex;
       flex-wrap: wrap;
-      gap : 8px;
-      }
-    
-    .demo-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap : 2px;
-    flex-wrap: nowrap;
-    width: 80px;
-    padding: 8px;
-    margin: 8px;
-    border-radius: 50px;
-    border: 1px solid var(--noir-attenue);
-    background: transparent;
-    color: var(--noir-attenue);
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.2s ease;
-    text-decoration: none;
+      gap: 8px;
+      flex: 1;
+    }
 
-    &:hover {
-      background: var(--jaune-vif);
-      color: var(--vert-fonce);
-      border-color: var(--vert-fonce);
-      transform: translateX(5px);
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .demo-btn,
+    .github-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: nowrap;
+      padding: 8px 14px;
+      margin: 4px;
+      border-radius: 50px;
+      border: 1px solid var(--noir-attenue);
+      background: transparent;
+      color: var(--noir-attenue);
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      white-space: nowrap;
+
+      &:hover {
+        background: var(--jaune-vif);
+        color: var(--vert-fonce);
+        border-color: var(--vert-fonce);
+        transform: translateX(5px);
       }
+
+      @media (max-width: 500px) {
+        padding: 7px 12px;
+      }
+
+      @media (max-width: 350px) {
+        svg:last-child { display: none; }
+      }
+    }
+
+    @media (max-width: 600px) {
+      margin: 10px 16px 0 16px;
+    }
+
+    @media (max-width: 250px) {
+      margin: 6px 6px 0 6px;
     }
   }
 
-  .modal-text{
+  .modal-text {
     margin: 20px 30px 40px 30px;
+
+    @media (max-width: 600px) { margin: 16px; }
+    @media (max-width: 250px) { margin: 6px 0; }
+  }
+
+  @media (max-width: 250px) {
+    width: 100%;
+    border-radius: 12px;
   }
 }
 
-/* CLOSE MODAL */
 .close-btn {
   position: absolute;
   top: 15px;

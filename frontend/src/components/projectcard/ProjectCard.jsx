@@ -16,6 +16,7 @@ const ProjectCard = ({ item, onOpen, isAdmin, onEdit }) => {
       <img
         src={`${IMG_URL}/${item.cover}`}
         alt={`Couverture du projet : ${item.title}`}
+        width="800" height="200"
         loading="lazy"
         decoding="async"
       />

@@ -1,13 +1,14 @@
 # ========== BACKEND ==========
 backend/node_modules/
 backend/.env
-backend/img/  # Les images seront gérées séparément
+backend/img/
 
 # ========== FRONTEND ==========
-front/node_modules/
-front/.env
-front/.vite/    # Vite
-front/dist/     # Dossier de build
+frontend/node_modules/
+frontend/.env
+frontend/.env.local
+frontend/.env.production.local
+frontend/dist/
 
 # ========== LOGs et IDE ==========
 .DS_Store

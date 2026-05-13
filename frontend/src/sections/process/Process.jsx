@@ -15,10 +15,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Smallslider from "../../components/smallslider/Smallslider";
 
-/**
- * Section "Process" de la page d'accueil.
- * Décrit les étapes de construction d'un projet et affiche les témoignages clients.
- */
 const Process = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -101,7 +97,6 @@ const Process = () => {
         <FontAwesomeIcon icon={faQuoteRight} aria-hidden="true" />
       </div>
 
-      {/* ✅ Smallslider avec lazy loading géré dans le composant */}
       <Smallslider />
     </section>
   );

@@ -7,7 +7,7 @@ const Testimony = ({ client, mission, testimony, avatar }) => {
     <figure className="testimony">
       <div className="testimony__avatar">
         {avatar
-          ? <img src={`${IMG_URL}/${avatar}`} alt={`Avatar de ${client}`} />
+          ? <img src={`${IMG_URL}/${avatar}`} alt={`Avatar de ${client}`} width="60" height="60" />
           : <div className="testimony__placeholder" />
         }
       </div>

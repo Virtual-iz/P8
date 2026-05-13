@@ -1,7 +1,19 @@
-#process{
+#process {
 
-    .soustitre{
-        display: flex;
-        gap: 20px;
+  .soustitre {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  // Bulles : 2 colonnes jusqu'à 460px pour rester plus longtemps groupées
+  article.grid {
+    @media (max-width: 770px) {
+      grid-template-columns: repeat(2, 1fr);
     }
+    @media (max-width: 460px) {
+      grid-template-columns: 1fr;
+    }
+  }
 }

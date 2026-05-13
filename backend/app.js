@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
+import compression from 'compression';
 import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -14,11 +16,12 @@ dotenv.config();
 
 const app = express();
 
+// ── Compression gzip ──────────────────────────────────────────────────────────
+app.use(compression());
+
 // ── Sécurité HTTP ─────────────────────────────────────────────────────────────
-// helmet() active automatiquement : CSP, X-Frame-Options, HSTS, X-Content-Type-Options...
-// crossOriginResourcePolicy: 'cross-origin' est obligatoire car le frontend (origine différente)
-// doit pouvoir charger les images servies par ce backend (/img).
-// Sans ce réglage, helmet bloque les requêtes cross-origin sur les ressources statiques.
+// crossOriginResourcePolicy: 'cross-origin' requis pour que le frontend
+// (origine différente) puisse charger les images servies par /img.
 app.use(helmet({
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
@@ -32,18 +35,52 @@ app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use(express.json({ limit: '10mb' }));
 
 // ── CORS ──────────────────────────────────────────────────────────────────────
-// N'autorise que le frontend, avec les méthodes et headers strictement nécessaires
+// Liste blanche des origines autorisées à appeler l'API.
+// N'affecte pas les visiteurs (navigation normale) — uniquement les fetch() JS cross-origin.
+const allowedOrigins = [
+  'https://virtual-iz.fr',
+  'https://www.virtual-iz.fr',
+  'http://localhost:5173', // dev
+];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    // Autorise aussi les requêtes sans origin (Postman, curl)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
+// ── Rate limiting ─────────────────────────────────────────────────────────────
+
+// Auth : 10 tentatives par IP sur 15 min — protection bruteforce admin
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Trop de tentatives, réessayez dans 15 minutes.' },
+});
+
+// Contact : 5 messages par IP par heure — protection spam SMTP
+const contactLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Trop de messages envoyés, réessayez dans une heure.' },
+});
+
 // ── Routes API ────────────────────────────────────────────────────────────────
-app.use('/api/auth',        authRoutes);
-app.use('/api/projects',    projectsRoutes);
-app.use('/api/testimonies', testimoniesRoutes);
-app.use('/api/contact',     contactRoutes);
+app.use('/api/auth',        authLimiter,    authRoutes);
+app.use('/api/contact',     contactLimiter, contactRoutes);
+app.use('/api/projects',                    projectsRoutes);
+app.use('/api/testimonies',                 testimoniesRoutes);
 
 // ── Gestion centralisée des erreurs (doit rester en dernier) ──────────────────
 app.use(errorHandler);

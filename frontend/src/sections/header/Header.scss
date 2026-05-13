@@ -3,12 +3,12 @@
   width: 100%;
   min-height: 100vh;
   padding-bottom: 60px;
-  background-image: url('../../assets/img/kennet-river_isabelle-zezima.jpg');
+  background-color: var(--vert-fonce);
+  background-image: url('../../assets/img/kennet-river_isabelle-zezima.webp');
   background-size: cover;
   background-position: center;
   color: var(--blanc-casse);
 
-  // Assombrit le fond pour la lisibilité
   &::before {
     content: '';
     position: absolute;
@@ -17,70 +17,58 @@
     z-index: 0;
   }
 
-  // Tous les enfants directs au-dessus de l'overlay
   > * {
     position: relative;
     z-index: 1;
   }
 
   // =====================
-  // LAYOUT PRINCIPAL : 2 colonnes
-  // align-items: flex-start → les deux colonnes s'ancrent en haut
+  // LAYOUT PRINCIPAL : 2 colonnes → colonne sur mobile (photo en dessous)
   // =====================
   .home-content {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 20px;
-
-    @media (max-width: 768px) {
+    padding : 20px;
+    @media (max-width: 500px) {
       flex-direction: column;
       align-items: center;
     }
   }
 
   // =====================
-  // COLONNE GAUCHE : titre + accroche
+  // COLONNE GAUCHE : logo puis h2 + accroche
   // =====================
   .titre-et-accroche {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
     width: 55%;
     padding-top: 60px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 
-    @media (max-width: 1024px) {
-      width: 58%;
-      padding-top: 50px;
-    }
+    @media (max-width: 1024px) { width: 58%; padding-top: 50px; }
+    @media (max-width: 768px)  { width: 100%; padding-top: 30px; }
+    @media (max-width: 480px)  { padding-top: 20px; }
+  }
 
-    @media (max-width: 768px) {
-      width: 100%;
-      padding-top: 30px;
-      justify-content: flex-start;
-      padding-left: 10px;
-    }
-
-    @media (max-width: 520px) {
-      // Empile titre-site et accroche verticalement.
-      // En dessous de 520px, accroche (180px) + titre-site (~155px) = trop serré côte à côte.
+  // H2+ accroche + boutons
+  .titre-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    @media (max-width: 280px) {
       flex-direction: column;
-      gap: 10px;
-      padding-left: 0;
-    }
-
-    @media (max-width: 480px) {
-      padding-top: 20px;
     }
   }
 
-  // LOGO + H2
+  // H2
   .titre-site {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    width: 100%;
-    padding-top: 40px;
 
     h2 {
       display: flex;
@@ -89,20 +77,11 @@
       font-size: 42px;
 
       @media (max-width: 1100px) { font-size: 38px; }
-      @media (max-width: 900px)  { font-size: 34px; }
       @media (max-width: 768px)  { font-size: 30px; }
-      @media (max-width: 480px)  { font-size: 26px; }
+      @media (max-width: 400px)  { font-size: 26px; }
     }
 
-    @media (max-width: 768px) { padding-top: 20px; }
-
-    @media (max-width: 520px) {
-      // Une fois empilé, align à gauche (plus logique en colonne)
-      align-items: flex-start;
-      padding-top: 16px;
-
-      h2 { align-items: flex-start; }
-    }
+    @media (max-width: 280px) { align-items: center; }
   }
 
   // TEXTE ACCROCHE + BOUTONS
@@ -111,44 +90,39 @@
     flex-direction: column;
     width: 200px;
     flex-shrink: 0;
-    padding-top: 40px;
+
+    @media (max-width: 480px) { padding-top: 0px; }
 
     p {
-      // 80px logo + 15px padding h2 → décale le texte pour qu'il s'aligne visuellement
-      // avec le bas du h2 quand titre-site et accroche sont côte à côte
-      padding-top: 95px;
+      // padding-top aligne visuellement l'accroche avec le bas du h2
       font-size: 1.39rem;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 
       @media (max-width: 1100px) { font-size: 1.2rem; }
-      @media (max-width: 900px)  { font-size: 1.05rem; padding-top: 80px; }
-      @media (max-width: 768px)  { font-size: 1rem;    padding-top: 60px; }
-      @media (max-width: 520px)  {
-        // Une fois empilé verticalement, la compensation logo/h2 disparaît
-        padding-top: 0;
-        font-size: 0.95rem;
-      }
-      @media (max-width: 480px)  { font-size: 0.9rem; }
+      @media (max-width: 900px)  { font-size: 1.05rem; }
+      @media (max-width: 768px)  { font-size: 1rem;}
+      @media (max-width: 520px)  { font-size: 0.95rem; }
     }
 
-    // Boutons CV + LinkedIn
     div {
       display: flex;
-      margin-top: 16px;
+          @media (max-width: 280px) {justify-content: center }
+      ;
     }
 
     @media (max-width: 900px) { width: 170px; }
-    @media (max-width: 768px) { width: 180px; }
-    @media (max-width: 520px) {
-      // Pleine largeur une fois empilé
+    @media (max-width: 768px) { width: 160px; }
+    @media (max-width: 480px) { width: 140px; }
+
+    @media (max-width: 280px) {
       width: 100%;
-      padding-top: 0;
+      p   { text-align: center; }
+
     }
   }
 
   // =====================
-  // COLONNE DROITE : photo de profil dans blob
-  // flush en haut à droite grâce à align-items: flex-start sur home-content
+  // COLONNE DROITE : photo — passe en dessous sur mobile
   // =====================
   .profilpic {
     position: relative;
@@ -156,22 +130,11 @@
     max-width: 550px;
     flex-shrink: 1;
 
-    @media (max-width: 1024px) {
-      width: 42%;
-      max-width: 460px;
-    }
-
-    @media (max-width: 768px) {
-      width: 100%;
-      max-width: 280px;
-    }
-
-    @media (max-width: 480px) {
-      max-width: 220px;
-    }
+    @media (max-width: 1024px) { width: 42%; max-width: 460px; }
+    @media (max-width: 768px)  { width: 100%; max-width: 280px; }
+    @media (max-width: 480px)  { max-width: 220px; }
   }
 
-  // SVG blob scalable — occupe toute la largeur de son conteneur
   .blob-svg {
     width: 100%;
     height: auto;

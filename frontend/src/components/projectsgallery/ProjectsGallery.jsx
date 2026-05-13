@@ -54,7 +54,10 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
         body: formData,
       });
 
-      if (!res.ok) throw new Error('Erreur sauvegarde');
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.message || `Erreur ${res.status}`);
+      }
 
       const saved = await res.json();
       setProjects(prev => {
@@ -67,7 +70,7 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
       setSelectedProject(null);
     } catch (err) {
       console.error('❌ Erreur sauvegarde:', err);
-      alert('Erreur lors de la sauvegarde du projet');
+      alert(`Erreur : ${err.message}`);
     }
   };
 
@@ -161,7 +164,7 @@ const ProjectsGallery = ({ activeFilters, isAdmin }) => {
             setSelectedProject(null);
           }}
           onSave={handleSave}
-          onDelete={handleDelete}
+          onDelete={editingProject.id ? handleDelete : undefined}
         />
       )}
       {selectedProject && !editingProject && (

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import Header from '../sections/header/Header';
 import NavBar from '../sections/navbar/NavBar';
 import About from '../sections/about/About';
@@ -7,8 +7,10 @@ import Portfolio from '../sections/portfolio/Portfolio';
 import Process from '../sections/process/Process';
 import Contact from '../sections/contact/Contact';
 import Footer from '../sections/footer/Footer';
-import AdminLogin from '../components/adminlogin/AdminLogin';
 import '../App.scss';
+
+// Chargé uniquement si l'utilisateur ouvre la modale admin
+const AdminLogin = lazy(() => import('../components/adminlogin/AdminLogin'));
 
 
 const Home = () => {
@@ -41,11 +43,15 @@ const Home = () => {
       <Contact />
       <Footer />
 
-      <AdminLogin
-        isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
-        onLogin={handleLogin}
-      />
+      {isAdminOpen && (
+        <Suspense fallback={null}>
+          <AdminLogin
+            isOpen={isAdminOpen}
+            onClose={() => setIsAdminOpen(false)}
+            onLogin={handleLogin}
+          />
+        </Suspense>
+      )}
     </main>
   );
 };

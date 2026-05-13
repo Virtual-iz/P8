@@ -1,21 +1,15 @@
 .tag {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 25px;
-    border-radius: 8px;
-    background-color: var(--vert-fonce);
-    color: var(--blanc-casse);
-    font-size: 12px;
-    padding: 0 22px 0 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  border-radius: 8px;
+  background-color: var(--vert-fonce);
+  color: var(--blanc-casse);
+  font-size: 12px;
+  padding: 0 22px;
 
-    @media screen and (max-width: 768px) {
-        height: 18px;
-    }
-
-    @media screen and (max-width: 280px) {
-        justify-content: center;
-        width: 80%;
-    }
-
+  @media (max-width: 768px) {
+    height: 18px;
+  }
 }

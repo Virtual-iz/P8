@@ -1,14 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Bubble.scss";
+import rouecranteeUrl from "../../assets/img/rouecrantee.svg";
 
-/**
- * Bubble
- *
- * Changement majeur :
- * - plus d’animation au scroll
- * - animation uniquement au hover
- * - direction conservée (horaire / antihoraire)
- */
 const Bubble = ({
   icon,
   text,
@@ -23,11 +16,11 @@ const Bubble = ({
         ${className}
       `}
     >
-      {/* roue crantée SVG */}
       <img
-        src="/src/assets/img/rouecrantee.svg"
+        src={rouecranteeUrl}
         alt=""
         className="bubble__gear"
+        loading="lazy"
       />
 
       {/* contenu fixe */}

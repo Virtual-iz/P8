@@ -1,9 +1,5 @@
 import nodemailer from 'nodemailer';
 
-/**
- * Transporteur SMTP — identifiants via variables d'environnement.
- * rejectUnauthorized: false pour tolérer les certificats auto-signés en local.
- */
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: parseInt(process.env.SMTP_PORT, 10) || 587,
@@ -12,7 +8,6 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-  tls: { rejectUnauthorized: false }
 });
 
 /** Envoie l'email de contact via SMTP. */

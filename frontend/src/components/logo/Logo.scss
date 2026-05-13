@@ -17,6 +17,8 @@
 .virtualizlogo{
     img{
         height: 80px;
+        width: auto;
+        max-width: 100%;
             @media (max-width: 768px) {
             height: 60px;
             }

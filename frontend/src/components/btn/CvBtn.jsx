@@ -2,11 +2,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import './Btn.scss';
 
-/*Le PDF doit être placé dans frontend/public/virtualiz-cv.pdf.Vite sert le dossier public/ à la racine*/
+// Le PDF doit être dans frontend/public/ — Vite sert ce dossier à la racine
 const CVBtn = () => {
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/virtualiz-cv.pdf'; // servi depuis frontend/public/
+    link.href = '/virtualiz-cv.pdf';
     link.download = 'virtualiz-cv.pdf';
     document.body.appendChild(link);
     link.click();

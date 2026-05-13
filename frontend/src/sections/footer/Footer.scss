@@ -1,5 +1,13 @@
+// SVG hors du flux pour éviter le gap beige entre contact et footer
+.footer-clippath {
+  display: block;
+  position: absolute;
+  overflow: hidden;
+}
+
 .footer {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -7,15 +15,26 @@
   padding: 50px 12px 20px;
   width: 100%;
   min-height: 80px;
-
   color: var(--jaune-vif);
-
-  background-image: url('../../assets/img/kennet-river_isabelle-zezima.jpg');
+  background-color: var(--vert-fonce);
+  background-image: url('../../assets/img/kennet-river_isabelle-zezima.webp');
   background-size: cover;
   background-position: center;
-
-  /* découpe */
   clip-path: url(#footerWave);
+
+  &__center {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  @media (max-width: 400px) {
+    &__center {
+      order: -1;
+      width: 100%;
+      justify-content: center;
+    }
+  }
 }
 
 .logo {

@@ -1,11 +1,11 @@
 import './Logo.scss';
-import logoImage from "../../assets/img/virtualiz-logo.png";
+import logoImage from "../../assets/img/virtualiz-logo.webp";
 
-const Logo = () => { // Supprimez la prop `logo` si vous utilisez directement l'image importée
+const Logo = () => { 
   return (
-    <div className='virtualizlogo'>
-      <img src={logoImage} alt="Logo Virtualiz" />
-    </div>
+    <h1 className='virtualizlogo'>
+      <img src={logoImage} alt="Logo Virtualiz" width="200" height="80" />
+    </h1>
   );
 };
 

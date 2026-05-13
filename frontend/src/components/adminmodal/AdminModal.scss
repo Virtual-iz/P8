@@ -76,7 +76,6 @@
   align-items: flex-start;
   min-height: 130px;
 
-  // Scrollbar 
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
 }
@@ -202,6 +201,16 @@
 // ============================================================
 // CHAMPS DE FORMULAIRE INLINE
 // ============================================================
+
+.admin-section-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--vert-fonce);
+  padding: 4px 0 6px 0;
+  margin-bottom: 10px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  font-family: 'Montserrat', sans-serif;
+}
 
 // Titre principal : ressemble à un h3 mais est éditable
 .admin-title-input {
@@ -329,25 +338,35 @@
     align-items: center;
     gap: 12px;
     flex-shrink: 0;
+
+    .validate-btn {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
   }
 }
 
-// Bouton suppression projet
 .delete-btn {
-  background: transparent;
-  border: 1px solid rgb(0, 0, 0);
-  color: rgb(0, 0, 0);
-  padding: 8px 16px;
-  border-radius: 50px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgb(204, 99, 0);
+  color: white;
   cursor: pointer;
   font-size: 13px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  transition: all 0.2s;
+  justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
 
   &:hover {
-    background: rgb(204, 99, 0);
-    color: white;
+    background: rgb(148, 71, 0);
   }
 }

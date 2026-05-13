@@ -5,10 +5,6 @@ import PercentRound from '../../components/percent/PercentRound';
 import { faCode, faServer, faPalette, faScrewdriverWrench } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-/**
- * Section "Activités" de la page d'accueil.
- * Affiche les compétences sous forme de pourcentages et de catégories.
- */
 const Services = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);

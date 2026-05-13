@@ -37,10 +37,16 @@
   gap: 8px;
   width: 260px;
   min-width: 260px;
+  max-width: 100%;
   height: fit-content;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   border: 1px solid var(--jaune-vif);
+
+  @media (max-width: 290px) {
+    width: 100%;
+    min-width: unset;
+  }
 
   svg {
     padding-right: 4px;

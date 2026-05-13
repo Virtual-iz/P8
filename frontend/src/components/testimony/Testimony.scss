@@ -48,7 +48,7 @@
 
     span {
       font-size: 14px;
-      color: #666;
+      color: var(--noir-attenue);
     }
   }
 
@@ -58,5 +58,26 @@
     line-height: 1.5;
     color: var(--noir-attenue);
     margin: 0;
+  }
+
+  @media (max-width: 400px) {
+    padding: 14px;
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+
+    &__avatar {
+      width: 44px;
+      height: 44px;
+    }
+
+    &__meta {
+      strong { font-size: 15px; }
+      span   { font-size: 12px; }
+    }
+
+    &__text {
+      font-size: 14px;
+    }
   }
 }

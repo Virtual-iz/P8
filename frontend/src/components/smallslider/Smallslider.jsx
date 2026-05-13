@@ -9,11 +9,7 @@ const getVisibleSlides = () => {
   return 1;
 };
 
-/**
- * Composant Smallslider.
- * Affiche un carrousel de témoignages clients.
- * API_URL inclut déjà /api, donc on n'ajoute pas /api dans le chemin.
- */
+// API_URL inclut déjà /api — ne pas l'ajouter dans le chemin fetch
 const Smallslider = () => {
   const [testimonies, setTestimonies] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);

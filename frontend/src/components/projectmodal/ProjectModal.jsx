@@ -3,6 +3,7 @@ import Carrousel from '../carrousel/Carrousel';
 import Tag from '../tag/Tag';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 /** Modale de détail d'un projet : carrousel, tags, lien démo, textes. */
 const ProjectModal = ({ project, onClose }) => {
@@ -32,24 +33,36 @@ const ProjectModal = ({ project, onClose }) => {
         <Carrousel data={project} />
 
         <article className="modal-top">
-          <div className="tags-container" aria-label={`Filtres : ${project.filtres?.join(', ') || 'Aucun'}`}>
-            {project.filtres?.map((f, i) => (
+          <div className="tags-container" aria-label={`Tags : ${project.tags?.join(', ') || 'Aucun'}`}>
+            {project.tags?.map((f, i) => (
               <Tag key={i} item={f} />
             ))}
           </div>
 
-          {/* N'affiche le bouton que si une URL de démo est renseignée */}
-          {project.demo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="demo-btn"
-              aria-label={`Voir la démo du projet ${project.title}`}
-            >
-              Démo <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
-            </a>
-          )}
+          <div className="modal-actions">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="github-btn"
+                aria-label={`Voir le code GitHub du projet ${project.title}`}
+              >
+                <FontAwesomeIcon icon={faGithub} aria-hidden="true" /> GitHub <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
+              </a>
+            )}
+            {project.demo && (
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="demo-btn"
+                aria-label={`Voir la démo du projet ${project.title}`}
+              >
+                Démo <FontAwesomeIcon icon={faArrowRight} aria-hidden="true" />
+              </a>
+            )}
+          </div>
         </article>
 
         <article className="modal-text grid col2">

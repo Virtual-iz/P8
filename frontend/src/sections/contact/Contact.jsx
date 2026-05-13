@@ -9,16 +9,9 @@ import { API_URL } from '../../config';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTableList, faCalendarDays, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
-/**
- * IMAGE CARTE
- */
-import carteGrenoble from '../../assets/img/img-carte-grenoble.png';
+import carteGrenoble from '../../assets/img/img-carte-grenoble.webp';
 
-/**
- * Section Contact de la page d'accueil.
- * Gère le formulaire de contact et l'envoi vers le backend.
- * API_URL inclut déjà /api, donc on n'ajoute pas /api dans le chemin.
- */
+// API_URL inclut déjà /api — ne pas l'ajouter dans le chemin fetch
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -80,17 +73,12 @@ const Contact = () => {
         <div className='yellowline'></div>
       </div>
 
-      {/* =========================
-          CONTENEUR SUPERPOSITION
-          ========================= */}
       <div className="contact-wrapper">
 
-        {/* CARTE EN FOND */}
         <div className="contact-map">
-          <img src={carteGrenoble} alt="Carte Grenoble" />
+          <img src={carteGrenoble} alt="Carte Grenoble" loading="lazy" />
         </div>
 
-        {/* FORMULAIRE AU-DESSUS */}
         <form onSubmit={handleSubmit} className="contact-form">
 
           <article>

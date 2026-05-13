@@ -12,11 +12,11 @@ const NavBar = () => {
   const [isNarrow, setIsNarrow] = useState(window.innerWidth < NARROW_BREAKPOINT);
 
   const sections = [
-    { id: "home",      text: "",          icon: faHouse },
-    { id: "apropos",   text: "A propos",  icon: faFingerprint },
-    { id: "activites", text: "Activités", icon: faBriefcase },
-    { id: "portfolio", text: "Portfolio", icon: faBookOpen },
-    { id: "contact",   text: "",          icon: faEnvelope },
+    { id: "home",      text: "",          label: "Accueil",   icon: faHouse },
+    { id: "apropos",   text: "A propos",  label: "A propos",  icon: faFingerprint },
+    { id: "activites", text: "Activités", label: "Activités", icon: faBriefcase },
+    { id: "portfolio", text: "Portfolio", label: "Portfolio", icon: faBookOpen },
+    { id: "contact",   text: "",          label: "Contact",   icon: faEnvelope },
   ];
 
   useEffect(() => {
@@ -60,6 +60,7 @@ const NavBar = () => {
             icon={!showText ? sec.icon : null}
             isActive={isActive}
             href={`#${sec.id}`}
+            ariaLabel={sec.label}
           />
         );
       })}

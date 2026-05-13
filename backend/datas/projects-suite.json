@@ -1,0 +1,181 @@
+[
+  {
+    "id": "site-wordpress-boulangerie-locale",
+    "title": "Site WP d’une boulangerie locale",
+    "p1": "Site wordpress répondant aux besoins de la boulangerie : pouvoir ajouter soi-même des images dans la galerie, viser une évolution de vente en ligne",
+    "cover": "boulangerieGrainedAlice.jpg",
+    "pictures": [
+      "boulangerieGrainedAlice.jpg"
+    ],
+    "demo": "https://grainedalice.fr",
+    "github": "",
+    "title2": "Objectifs du projet",
+    "p2": [
+      ""
+    ],
+    "title3": "Défis",
+    "p3": [
+      ""
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      ""
+    ],
+    "filtres": [
+      "webdesign",
+      "front"
+    ],
+    "tags": [
+      "HTML5",
+      "CSS",
+      "Jquery",
+      "Wordpress"
+    ]
+  },
+  {
+    "id": "site-portfolio-Julien-mediateur",
+    "title": "Site portfolio pour un médiateur",
+    "p1": "Création d'un site portfolio pour un médiateur, mettant en avant ses compétences, ses expériences et ses réalisations dans le domaine de la médiation.",
+    "cover": "mediateurCapture.png",
+    "pictures": [
+      "mediateurAccueil.png",
+      "mediateurApropos.png",
+      "mediateurServices.png",
+      "mediateurContact.png"
+    ],
+    "demo": "https://julieniemmolo.com",
+    "github": "",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "Permettre au médiateur de présenter ses valeurs et services de manière professionnelle et attrayante."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "Il fallait créer un design qui reflète la personnalité du médiateur tout en restant professionnel, et s'assurer que le site soit facile à naviguer pour les visiteurs."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "Le design a été conçu pour être à la fois professionnel et accueillant, avec une navigation intuitive pour permettre aux visiteurs de trouver facilement les informations qu'ils recherchent."
+    ],
+    "filtres": [
+      "webdesign",
+      "front",
+      "back"
+    ],
+    "tags": [
+      "HTML5",
+      "Scss",
+      "React",
+      "JS",
+      "Claude IA"
+    ]
+  },
+  {
+    "id": "immersion-em-site-informatif-complexe-sur-une-maladie-invalidante",
+    "title": "Site d'information sur une maladie invalidante",
+    "p1": "Développement d'un site informatif complexe sur l'Encéphalomyélite Myalgique, maladie invalidante, destiné à sensibiliser le public et fournir des informations précises et fiables.",
+    "cover": "ImmersionEM-capture-accueil.png",
+    "pictures": [
+      "ImmersionEM-capture-accueil.png"
+    ],
+    "demo": "https://immersion-em.com",
+    "github": "",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "Le site avait pour objectif de sensibiliser le public à la maladie, de fournir des informations précises et fiables. "
+    ],
+    "title3": "Défis",
+    "p3": [
+      "La complexité des informations à présenter a fait de la maquette un véritable défi pour conserver la richesse du contenu tout en assurant une clarté pour les visiteurs."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "Une structure claire et une hiérarchisation du contenu ont été mises en place pour permettre aux visiteurs de naviguer facilement à travers les différentes sections du site et de trouver les informations qu'ils recherchent. De nombreuses référeces ont été rajoutées."
+    ],
+    "filtres": [
+      "webdesign",
+      "front",
+      "back"
+    ],
+    "tags": [
+      "HTML5",
+      "CSS",
+      "Scss",
+      "React",
+      "JS",
+      "SEO",
+      "MongoDB",
+      "Mongoose",
+      "Node",
+      "Express",
+      "API REST"
+    ]
+  },
+  {
+    "id": "flyer-pour-la-compagnie-de-danse-en-ka",
+    "title": "Flyer pour la compagnie de danse En Ka",
+    "p1": "Création d'un flyer pour la compagnie de danse En Ka, présentant globalement la compagnie au public et donnant les informations nécessaires pour les contacter ou assister à leurs spectacles.",
+    "cover": "EnKa-flyer1.jpg",
+    "pictures": [
+      "EnKa-flyer1.jpg",
+      "EnKa-flyer2.jpg"
+    ],
+    "demo": "",
+    "github": "",
+    "title2": "Objectifs du projet",
+    "p2": [
+      "En Ka souhaitait un flyer basique mais élégant à distribuer en amont de leurs spectacles."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "Partant de rien, la compagnie avait besoin de définir entièrement son identité visuelle, et avoir également du contenu photographique pour illustrer le flyer."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "J'ai travaillé sur plusieurs tableaux avec la compagnie, pour leur constituer une base photographique, une video de présentation, leur identité visuelle, et le flyer lui même. Je les ai également guidé pour la commande de l'impression papier."
+    ],
+    "filtres": [
+      "photo",
+      "imprime"
+    ],
+    "tags": [
+      "photo",
+      "retouche d'image",
+      "mise en page",
+      "communication visuelle"
+    ]
+  },
+  {
+    "id": "photographies-culinaires-pour-bridor",
+    "title": "Photographies culinaires pour Bridor",
+    "p1": "Création de photographies culinaires pour la marque Bridor, mettant en valeur leur ligne de produits.",
+    "cover": "Bridor1.jpg",
+    "pictures": [
+      "Bridor1.jpg",
+      "Bridor2.jpg",
+      "Bridor3.jpg",
+      "Bridor4.jpg",
+      "Bridor5.jpg"
+    ],
+    "title2": "Objectifs du projet",
+    "p2": [
+      "Bridor souhaitait mettre en valeur leurs produits dans des mises en scène originales et attrayantes pour leur communication visuelle."
+    ],
+    "title3": "Défis",
+    "p3": [
+      "La conception du projet nécessitait une approche créative et une maîtrise technique."
+    ],
+    "title4": "Solutions apportées",
+    "p4": [
+      "Avec l'aide d'un cuisiner qui préparait les produits, j'ai réalisé sur plans préalables une série de photographies culinaires, en travaillant sur la composition, l'éclairage et les angles de prise de vue pour proposer une série inédite."
+    ],
+    "filtres": [
+      "photo"
+    ],
+    "tags": [
+      "photo",
+      "retouche d'image",
+      "communication visuelle"
+    ]
+  }
+]

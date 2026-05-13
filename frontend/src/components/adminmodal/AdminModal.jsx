@@ -11,12 +11,7 @@ const csvToArray = (str) => str.split(',').map(s => s.trim()).filter(Boolean);
 /** Convertit une string avec sauts de ligne en tableau (éléments non vides). */
 const linesToArray = (str) => str.split('\n').map(s => s.trim()).filter(Boolean);
 
-// ========== COMPOSANT PRINCIPAL ==========
-/**
- * Formulaire d'édition de projet (admin uniquement).
- * Structuré comme la modale de visionnage : galerie en haut, grille de texte en bas.
- * Envoie toujours un FormData : requis par multer qui lit les données via req.body.data.
- */
+// FormData obligatoire : multer côté backend attend req.body.data (multipart)
 const AdminModal = ({ project, onClose, onSave, onDelete }) => {
   const fileInputRef = useRef(null);
 
@@ -34,9 +29,7 @@ const AdminModal = ({ project, onClose, onSave, onDelete }) => {
     title: project?.title || '',
     p1: project?.p1 || '',
     demo: project?.demo || '',
-    title2: project?.title2 || '',
-    title3: project?.title3 || '',
-    title4: project?.title4 || '',
+    github: project?.github || '',
     _p2: (project?.p2 || []).join('\n'),
     _p3: (project?.p3 || []).join('\n'),
     _p4: (project?.p4 || []).join('\n'),
@@ -77,9 +70,10 @@ const AdminModal = ({ project, onClose, onSave, onDelete }) => {
       p1: form.p1,
       cover,
       demo: form.demo,
-      title2: form.title2,
-      title3: form.title3,
-      title4: form.title4,
+      github: form.github,
+      title2: project?.title2 || '',
+      title3: project?.title3 || '',
+      title4: project?.title4 || '',
       pictures, // liste après suppressions — le backend supprimera les fichiers retirés
       p2: linesToArray(form._p2),
       p3: linesToArray(form._p3),
@@ -95,8 +89,6 @@ const AdminModal = ({ project, onClose, onSave, onDelete }) => {
   };
 
   if (!project) return null;
-
-  const isExisting = !!project.id;
 
   return (
     <div
@@ -211,6 +203,14 @@ const AdminModal = ({ project, onClose, onSave, onDelete }) => {
               className="admin-input admin-input--demo"
               aria-label="URL de la démo"
             />
+            <input
+              type="url"
+              value={form.github}
+              onChange={e => set('github', e.target.value)}
+              placeholder="https://github.com/..."
+              className="admin-input admin-input--demo"
+              aria-label="URL GitHub du projet"
+            />
           </div>
 
           {/* ===== GRILLE DE TEXTE (comme ProjectModal) ===== */}
@@ -237,13 +237,7 @@ const AdminModal = ({ project, onClose, onSave, onDelete }) => {
             </div>
 
             <div>
-              <input
-                value={form.title2}
-                onChange={e => set('title2', e.target.value)}
-                className="admin-title-input"
-                aria-label="Titre section 2"
-                placeholder="Objectifs du projet"
-              />
+              <p className="admin-section-title">{project?.title2 || 'Objectifs'}</p>
               <textarea
                 value={form._p2}
                 onChange={e => set('_p2', e.target.value)}
@@ -255,13 +249,7 @@ const AdminModal = ({ project, onClose, onSave, onDelete }) => {
             </div>
 
             <div>
-              <input
-                value={form.title3}
-                onChange={e => set('title3', e.target.value)}
-                className="admin-title-input"
-                aria-label="Titre section 3"
-                placeholder="Défis"
-              />
+              <p className="admin-section-title">{project?.title3 || 'Défis'}</p>
               <textarea
                 value={form._p3}
                 onChange={e => set('_p3', e.target.value)}
@@ -273,13 +261,7 @@ const AdminModal = ({ project, onClose, onSave, onDelete }) => {
             </div>
 
             <div>
-              <input
-                value={form.title4}
-                onChange={e => set('title4', e.target.value)}
-                className="admin-title-input"
-                aria-label="Titre section 4"
-                placeholder="Solutions apportées"
-              />
+              <p className="admin-section-title">{project?.title4 || 'Solutions apportées'}</p>
               <textarea
                 value={form._p4}
                 onChange={e => set('_p4', e.target.value)}
@@ -309,21 +291,20 @@ const AdminModal = ({ project, onClose, onSave, onDelete }) => {
             </div>
 
             <div className="admin-footer__actions">
-              {/* Suppression du projet (admin uniquement, projet existant) */}
-              {isExisting && onDelete && (
+              <button type="submit" className="validate-btn" aria-label="Sauvegarder les modifications">
+                <FontAwesomeIcon icon={faSave} aria-hidden="true" />
+              </button>
+
+              {onDelete && (
                 <button
                   type="button"
                   className="delete-btn"
                   onClick={() => onDelete(form.id)}
                   aria-label="Supprimer ce projet définitivement"
                 >
-                  <FontAwesomeIcon icon={faTrash} aria-hidden="true" /> x
+                  <FontAwesomeIcon icon={faXmark} aria-hidden="true" />
                 </button>
               )}
-
-              <button type="submit" className="validate-btn" aria-label="Sauvegarder les modifications">
-                <FontAwesomeIcon icon={faSave} aria-hidden="true" />Enregistrer
-              </button>
             </div>
 
           </div>

@@ -6,7 +6,7 @@ import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import Logo from '../../components/logo/Logo';
 import CvBtn from '../../components/btn/CvBtn';
 import SocialBtn from '../../components/btn/SocialBtn';
-import profilPic from "../../assets/img/profil-pic-virtualiz.jpg";
+const profilPic = '/profil-pic-virtualiz.webp';
 
 const Header = ({ openModal, isAdmin, onLogout }) => {
   return (
@@ -15,29 +15,30 @@ const Header = ({ openModal, isAdmin, onLogout }) => {
       <div className='home-content'>
 
         <article className='titre-et-accroche'>
-          <div className="titre-site">
-            <Logo />
-            <h2>
-              <span>Web</span>
-              <span>Design</span>
-              <span>Dev</span>
-            </h2>
-          </div>
-          <div className="accroche">
-            <p>
-              Conception et developpement de site web à Grenoble <br />
-              Communication sur tous supports!
-            </p>
-            <div>
-              <CvBtn />
-              <SocialBtn icon={faLinkedinIn} link="https://www.linkedin.com/in/virtual-iz/" />
+          <Logo />
+          <div className="titre-row">
+            <div className="titre-site">
+              <h2>
+                <span>Web</span>
+                <span>Design</span>
+                <span>Dev</span>
+              </h2>
+            </div>
+            <div className="accroche">
+              <p>
+                Conception et developpement de site web à Grenoble <br />
+                Communication sur tous supports!
+              </p>
+              <div>
+                <CvBtn />
+                <SocialBtn icon={faLinkedinIn} link="https://www.linkedin.com/in/virtual-iz/" label="LinkedIn" />
+              </div>
             </div>
           </div>
         </article>
 
         <article className="profilpic">
 
-          {/* Bouton admin */}
           <button
             className={`admin-btn ${isAdmin ? 'admin-btn--connected' : ''}`}
             onClick={isAdmin ? onLogout : openModal}
@@ -69,8 +70,8 @@ const Header = ({ openModal, isAdmin, onLogout }) => {
             {/* preserveAspectRatio="xMidYMid slice" : équivalent object-fit: cover */}
             <image
               href={profilPic}
-              x="0" y="0"
-              width="350" height="350"
+              x="20" y="0"
+              width="370" height="350"
               preserveAspectRatio="xMidYMid slice"
               clipPath="url(#blob-clip)"
             />
