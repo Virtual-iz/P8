@@ -13,7 +13,7 @@ Site : **https://virtual-iz.fr**
 | Backend | Node.js, Express 5 |
 | Données | JSON (fichiers plats) + images WebP |
 | Auth | JWT (jsonwebtoken), rate-limiting |
-| Email | Nodemailer (SMTP) |
+| Email | Resend (API HTTP) |
 | Uploads | Multer + Sharp (conversion WebP automatique) |
 
 ---
@@ -82,7 +82,7 @@ virtualiz/
     ├── package.json
     ├── controllers/
     │   ├── authController.js      # Vérification identifiants + génération JWT
-    │   ├── contactController.js   # Envoi email via Nodemailer SMTP
+    │   ├── contactController.js   # Envoi email via Resend (API HTTP)
     │   └── testimoniesController.js # Lecture des témoignages JSON
     ├── routes/
     │   ├── auth.js                # POST /api/auth/login
@@ -113,14 +113,12 @@ ADMIN_ID=votre_identifiant
 ADMIN_PASSWORD=votre_mot_de_passe_fort
 JWT_SECRET=une_chaine_aleatoire_longue_et_complexe
 
-# SMTP (Infomaniak Mail ou autre)
-SMTP_HOST=mail.infomaniak.com
-SMTP_PORT=587
-SMTP_USER=contact@contact.fr
-SMTP_PASS=votre_mot_de_passe_smtp
+# Resend (API HTTP — remplace SMTP, compatible Railway)
+# Créer un compte sur resend.com, générer une API key
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
 
 # Destinataire des messages de contact
-CONTACT_EMAIL=contact@contact.fr
+CONTACT_EMAIL=contact@virtual-iz.fr
 ```
 
 ### Frontend — `frontend/.env` (dev uniquement, non committé)

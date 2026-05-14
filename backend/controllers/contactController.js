@@ -1,43 +1,22 @@
-import nodemailer from 'nodemailer';
-import dns from 'dns/promises';
+import { Resend } from 'resend';
 
-// Railway ne peut pas joindre smtp.gmail.com en IPv6 — on force IPv4 via résolution DNS
-let smtpHost = process.env.SMTP_HOST;
-try {
-  const { address } = await dns.lookup(process.env.SMTP_HOST, { family: 4 });
-  smtpHost = address;
-} catch {
-  // fallback : hostname original
-}
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const transporter = nodemailer.createTransport({
-  host: smtpHost,
-  port: parseInt(process.env.SMTP_PORT, 10) || 587,
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-  tls: {
-    rejectUnauthorized: false,
-  },
-});
-
-/** Envoie l'email de contact via SMTP. */
+/** Envoie l'email de contact via Resend. */
 const sendContactEmail = async ({ name, email, service, deadline, message }) => {
-  await transporter.sendMail({
-    from: `"Portfolio Contact" <${process.env.SMTP_USER}>`,
+  await resend.emails.send({
+    from: 'Portfolio Contact <onboarding@resend.dev>',
     to: process.env.CONTACT_EMAIL,
-    replyTo: email,
+    reply_to: email,
     subject: `Nouveau message de ${name} — ${service || 'prestation non précisée'}`,
     text: `
-      Nom : ${name}
-      Email : ${email}
-      Prestation : ${service || 'non précisée'}
-      Délai : ${deadline || 'non précisé'}
+Nom : ${name}
+Email : ${email}
+Prestation : ${service || 'non précisée'}
+Délai : ${deadline || 'non précisé'}
 
-      Message :
-      ${message}
+Message :
+${message}
     `.trim(),
   });
 };
@@ -56,7 +35,7 @@ export const sendMessage = async (req, res, next) => {
     await sendContactEmail(req.body);
     res.json({ message: 'Message envoyé avec succès' });
   } catch (err) {
-    console.error('❌ Détail erreur SMTP :', err);
+    console.error('❌ Détail erreur Resend :', err);
     const sendErr = new Error('Erreur lors de l\'envoi du message');
     sendErr.status = 500;
     next(sendErr);

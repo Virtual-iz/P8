@@ -223,28 +223,22 @@ SMTP Infomaniak peut fonctionner directement depuis leurs serveurs :
    CONTACT_EMAIL=contact@virtual-iz.fr
    ```
 
-### Si le backend est sur Railway (Option B) — utiliser Gmail
+### Si le backend est sur Railway (Option B) — utiliser Resend
 
-⚠️ **Infomaniak bloque les connexions SMTP depuis les IPs cloud de Railway** (anti-spam). Il faut utiliser Gmail à la place.
+⚠️ **Railway bloque tous les ports SMTP sortants** (587 et 465), que ce soit Infomaniak, Gmail ou autre. Il faut utiliser une **API HTTP d'envoi d'email** à la place.
 
-1. Sur ton compte Google → [Sécurité → Mots de passe des applications](https://myaccount.google.com/apppasswords)
-   - La validation en deux étapes doit être activée
-   - Crée un mot de passe d'application (nom : "Virtualiz Portfolio" ou autre)
-   - Google génère un mot de passe de **16 caractères** — copie-le, il ne s'affiche qu'une fois
-2. Dans les variables d'environnement Railway :
+**Resend** est la solution retenue (3 000 emails/mois gratuits, API simple) :
+
+1. Créer un compte sur [resend.com](https://resend.com)
+2. Générer une **API Key** dans le dashboard Resend
+3. Dans les variables d'environnement Railway, ajouter :
    ```env
-   SMTP_HOST=smtp.gmail.com
-   SMTP_PORT=587
-   SMTP_USER=ton.adresse@gmail.com
-   SMTP_PASS=le-mot-de-passe-16-chars-genere-par-google
+   RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
    CONTACT_EMAIL=contact@virtual-iz.fr
    ```
-3. Dans `backend/controllers/contactController.js`, vérifier que `secure` vaut bien `false` (port 587 = STARTTLS, pas SSL) :
-   ```js
-   secure: false,
-   ```
+4. Le `from` par défaut utilise `onboarding@resend.dev` (domaine partagé Resend). Pour envoyer depuis `contact@virtual-iz.fr`, vérifier le domaine dans le dashboard Resend puis mettre à jour le champ `from` dans `contactController.js`.
 
-> Les emails sont envoyés **depuis Gmail** mais le `replyTo` pointe vers l'adresse du visiteur. `CONTACT_EMAIL` (`contact@virtual-iz.fr`) reste l'adresse de réception.
+> Le backend n'utilise plus nodemailer ni aucune variable SMTP.
 
 ---
 
