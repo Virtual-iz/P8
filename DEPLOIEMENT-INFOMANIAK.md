@@ -227,16 +227,98 @@ SMTP Infomaniak peut fonctionner directement depuis leurs serveurs :
 
 ⚠️ **Railway bloque tous les ports SMTP sortants** (587 et 465), que ce soit Infomaniak, Gmail ou autre. Il faut utiliser une **API HTTP d'envoi d'email** à la place.
 
-**Resend** est la solution retenue (3 000 emails/mois gratuits, API simple) :
+**Resend** est la solution retenue (3 000 emails/mois gratuits, API simple).
+
+#### Partie A — Créer le compte et récupérer la clé API
 
 1. Créer un compte sur [resend.com](https://resend.com)
-2. Générer une **API Key** dans le dashboard Resend
-3. Dans les variables d'environnement Railway, ajouter :
-   ```env
-   RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
-   CONTACT_EMAIL=contact@virtual-iz.fr
+2. Dans le dashboard Resend → menu gauche → **API Keys** → **Create API Key**
+3. Copier la clé générée (commence par `re_...`)
+4. Dans Railway → onglet **Variables** → **+ New Variable** :
    ```
-4. Le `from` par défaut utilise `onboarding@resend.dev` (domaine partagé Resend). Pour envoyer depuis `contact@virtual-iz.fr`, vérifier le domaine dans le dashboard Resend puis mettre à jour le champ `from` dans `contactController.js`.
+   Nom   : RESEND_API_KEY
+   Valeur: re_xxxxxxxxxxxxxxxxxxxx
+   ```
+   Garder aussi `CONTACT_EMAIL=contact@virtual-iz.fr`
+
+#### Partie B — Vérifier le domaine pour envoyer depuis `contact@virtual-iz.fr`
+
+Sans cette étape, les emails partent depuis `onboarding@resend.dev` et **ne sont reçus que par l'adresse avec laquelle vous vous êtes inscrit sur Resend**.
+
+**1. Récupérer les enregistrements DNS chez Resend**
+
+Dans le dashboard Resend → **Domains** → **+ Add Domain** → entrer `virtual-iz.fr` → **Add**.
+Resend affiche 3 enregistrements DNS à copier. Laisser cette page ouverte.
+
+**2. Ajouter les enregistrements dans Infomaniak**
+
+Sur [manager.infomaniak.com](https://manager.infomaniak.com) → dans la liste des domaines → cliquer sur les **3 points `⋮`** à droite de `virtual-iz.fr` → **Modifier la zone DNS**.
+
+Cliquer **Ajouter une entrée** et saisir les 3 enregistrements suivants :
+
+---
+
+**Enregistrement 1 — DKIM**
+
+| Champ | Valeur |
+|-------|--------|
+| Type (catégorie en haut) | `DKIM` |
+| Source | `resend._domainkey` *(`.virtual-iz.fr` s'ajoute automatiquement)* |
+| Type DNS (en bas) | `TXT` *(rempli automatiquement)* |
+| Valeur | *(la longue clé affichée par Resend, ex: `p=MIGf...`)* |
+| TTL | 1 heure |
+
+→ Valider
+
+---
+
+**Enregistrement 2 — MX**
+
+| Champ | Valeur |
+|-------|--------|
+| Type (catégorie en haut) | `MX` |
+| Source | `send` |
+| Type DNS (en bas) | `MX` *(rempli automatiquement)* |
+| Valeur | `feedback-smtp.eu-west-1.amazonses.com` |
+| Priorité | `10` |
+| TTL | 1 heure |
+
+→ Valider
+
+---
+
+**Enregistrement 3 — SPF** *(il n'y a pas de type "SPF" dans Infomaniak — utiliser TXT)*
+
+| Champ | Valeur |
+|-------|--------|
+| Type (catégorie en haut) | `TXT` |
+| Source | `send` |
+| Type DNS (en bas) | `TXT` *(rempli automatiquement)* |
+| Valeur | `v=spf1 include:amazonses.com ~all` |
+| TTL | 1 heure |
+
+→ Valider
+
+---
+
+**3. Vérifier chez Resend**
+
+Retourner sur la page Resend → cliquer **"I've added the records"** ou **"Verify DNS Records"**.
+La propagation DNS prend de quelques minutes à 1 heure. Si Resend dit "not verified", attendre 10 minutes et réessayer.
+Une fois tous les indicateurs verts → le domaine est vérifié ✅
+
+**4. Mettre à jour le `from` dans le code**
+
+Dans `backend/controllers/contactController.js`, changer :
+```js
+// Avant
+from: 'Portfolio Contact <onboarding@resend.dev>',
+
+// Après
+from: 'Portfolio Contact <contact@virtual-iz.fr>',
+```
+
+Puis commiter et pousser sur GitHub.
 
 > Le backend n'utilise plus nodemailer ni aucune variable SMTP.
 
