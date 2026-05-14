@@ -9,6 +9,7 @@ const Select = ({ name, value, onChange, required = false, children }) => {
       value={value}
       onChange={onChange}
       required={required}
+      autoComplete="off"
       className="form-component form-select"
     >
       {children}

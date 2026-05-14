@@ -84,12 +84,12 @@ const Contact = () => {
           <article>
             <div className="form-group">
               <label htmlFor="name">Nom</label>
-              <Input type="text" name="name" value={formData.name} onChange={handleChange} required />
+              <Input type="text" name="name" value={formData.name} onChange={handleChange} required autoComplete="name" />
             </div>
 
             <div className="form-group">
               <label htmlFor="email">Email</label>
-              <Input type="email" name="email" value={formData.email} onChange={handleChange} required />
+              <Input type="email" name="email" value={formData.email} onChange={handleChange} required autoComplete="email" />
             </div>
           </article>
 
@@ -132,6 +132,7 @@ const Contact = () => {
               className="form-component"
               rows="5"
               required
+              autoComplete="off"
             />
           </div>
 

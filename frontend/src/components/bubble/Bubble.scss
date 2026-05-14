@@ -29,7 +29,6 @@
     transform: translate(-50%, -50%);
     z-index: 1;
     pointer-events: none;
-    /* pas d’animation par défaut*/
     animation: none;
   }
 
@@ -37,7 +36,6 @@
   &__icon {
     position: relative;
     z-index: 2;
-
     font-size: 35px;
     color: var(--jaune-vif);
     margin-bottom: 10px;
@@ -46,25 +44,18 @@
   p {
     position: relative;
     z-index: 2;
-
     color: var(--blanc-casse);
     padding: 10px;
-    max-width: 190px;
-    font-size: 14px;
+    max-width: 180px;
+    font-size: 15px;
   }
-
 
   &:hover {
-    .bubble__gear {
-      animation: gear-spin 25s linear infinite;
-    }
+    .bubble__gear { animation: gear-spin 25s linear infinite; }
   }
 
-  /*alternance de sens*/
   &--counter:hover {
-    .bubble__gear {
-      animation: gear-spin-reverse 25s linear infinite;
-    }
+    .bubble__gear { animation: gear-spin-reverse 25s linear infinite; }
   }
 
   @media (max-width: 770px) {
@@ -73,18 +64,28 @@
     margin: 18px;
     padding: 18px;
 
-    &__gear {
-      width: 228px;
-      height: 228px;
-    }
-
-    &__icon {
-      font-size: 30px;
-    }
+    &__gear { width: 228px; height: 228px; }
+    &__icon { font-size: 30px; }
 
     p {
       font-size: 13px;
-      max-width: 150px;
+      max-width: 145px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    width: 165px;
+    height: 165px;
+    margin: 15px;
+    padding: 15px;
+
+    &__gear { width: 205px; height: 205px; }
+    &__icon { font-size: 26px; margin-bottom: 8px; }
+
+    p {
+      font-size: 12px;
+      max-width: 130px;
+      padding: 6px;
     }
   }
 
@@ -94,18 +95,11 @@
     margin: 12px;
     padding: 14px;
 
-    &__gear {
-      width: 202px;
-      height: 202px;
-    }
-
-    &__icon {
-      font-size: 22px;
-      margin-bottom: 6px;
-    }
+    &__gear { width: 202px; height: 202px; }
+    &__icon { font-size: 22px; margin-bottom: 6px; }
 
     p {
-      font-size: 11px;
+      font-size: 12px;
       max-width: 110px;
       padding: 4px;
     }
@@ -114,19 +108,11 @@
 
 /*rotations lentes*/
 @keyframes gear-spin {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 @keyframes gear-spin-reverse {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(-360deg);
-  }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(-360deg); }
 }

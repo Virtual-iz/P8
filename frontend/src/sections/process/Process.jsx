@@ -10,8 +10,6 @@ import {
   faGears,
   faCircleCheck,
   faWarehouse,
-  faQuoteLeft,
-  faQuoteRight
 } from "@fortawesome/free-solid-svg-icons";
 import Smallslider from "../../components/smallslider/Smallslider";
 
@@ -57,45 +55,39 @@ const Process = () => {
 
         <Bubble
           icon={faComments}
-          text="On définit précisément l’identité souhaitée pour le site, votre cible, les besoins techniques immédiats et potentiels."
+          text="On définit l’identité souhaitée pour le site, votre cible, les besoins techniques."
           isVisible={isVisible}
           direction="counter"
         />
 
         <Bubble
           icon={faFilePen}
-          text="On note tout dans un dossier. Je vous donne un temps estimatif puis travaille sur une maquette à valider"
+          text="On note tout dans un dossier. Je vous donne un temps estimatif et crée la maquette."
           isVisible={isVisible}
           direction="clockwise"
         />
 
         <Bubble
           icon={faWarehouse}
-          text="Si vous n’en avez pas déjà, je vous accompagne pour créer les pré-requis : nom de domaine et hébergement du site"
+          text="Je vous accompagne pour les pré-requis : nom de domaine et hébergement du site"
           isVisible={isVisible}
           direction="counter"
         />
 
         <Bubble
           icon={faCode}
-          text="J’entame le développement complet du site. On continue d’échanger et on ajuste si nécessaire"
+          text="On continue d’échanger pendant le développement et on ajuste si nécessaire"
           isVisible={isVisible}
           direction="clockwise"
         />
 
         <Bubble
           icon={faCircleCheck}
-          text="Votre site est en ligne. Vous conservez précieusement les identifiants pour d'éventuelles modifications futures"
+          text="Une fois le site en ligne, conservez bien les identifiants pour les mises à jour."
           isVisible={isVisible}
           direction="counter"
         />
       </article>
-
-      <div className='soustitre'>
-        <FontAwesomeIcon icon={faQuoteLeft} aria-hidden="true" />
-        <h3>Témoignages Clients</h3>
-        <FontAwesomeIcon icon={faQuoteRight} aria-hidden="true" />
-      </div>
 
       <Smallslider />
     </section>

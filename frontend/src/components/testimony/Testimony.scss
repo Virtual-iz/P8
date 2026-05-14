@@ -1,8 +1,4 @@
-// src/components/Testimony.scss
 .testimony {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
   padding: 20px;
   max-width: 500px;
   margin: 0 auto;
@@ -10,46 +6,25 @@
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
-  &__avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
-    flex-shrink: 0;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  &__placeholder {
-    width: 100%;
-    height: 100%;
-    border : 1px solid black;
-    border-radius: 50%;
-  }
-
-  &__content {
-    flex: 1;
-  }
-
   &__meta {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+  }
 
-    strong {
-      font-size: 18px;
-      font-weight: 600;
+  &__label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--vert-fonce);
+    opacity: 0.7;
+    margin-bottom: 4px;
+  }
+
+  h3 {
+    font-weight: 600;
     color: var(--noir-attenue);
-    }
-
-    span {
-      font-size: 14px;
-      color: var(--noir-attenue);
-    }
+    margin: 0 0 2px;
   }
 
   &__text {
@@ -60,24 +35,19 @@
     margin: 0;
   }
 
+  @media (max-width: 768px) {
+    &__text { font-size: 15px; }
+  }
+
+  @media (max-width: 480px) {
+    &__text { font-size: 14px; }
+  }
+
   @media (max-width: 400px) {
     padding: 14px;
-    gap: 10px;
     max-height: 200px;
     overflow-y: auto;
 
-    &__avatar {
-      width: 44px;
-      height: 44px;
-    }
-
-    &__meta {
-      strong { font-size: 15px; }
-      span   { font-size: 12px; }
-    }
-
-    &__text {
-      font-size: 14px;
-    }
+    &__label { font-size: 11px; }
   }
 }
