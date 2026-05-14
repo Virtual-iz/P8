@@ -1,10 +1,19 @@
 import nodemailer from 'nodemailer';
+import dns from 'dns/promises';
+
+// Railway ne peut pas joindre smtp.gmail.com en IPv6 — on force IPv4 via résolution DNS
+let smtpHost = process.env.SMTP_HOST;
+try {
+  const { address } = await dns.lookup(process.env.SMTP_HOST, { family: 4 });
+  smtpHost = address;
+} catch {
+  // fallback : hostname original
+}
 
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
+  host: smtpHost,
   port: parseInt(process.env.SMTP_PORT, 10) || 587,
   secure: false,
-  family: 4,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
