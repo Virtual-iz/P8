@@ -207,13 +207,44 @@ Dans le Manager Infomaniak :
 
 ---
 
-## Étape 7 — Configurer l'email (SMTP Infomaniak)
+## Étape 7 — Configurer l'email (SMTP)
+
+### Si le backend est sur Infomaniak (Option A)
+
+SMTP Infomaniak peut fonctionner directement depuis leurs serveurs :
 
 1. Dans le Manager Infomaniak, créez une adresse email : `contact@virtual-iz.fr`
-2. Récupérez les paramètres SMTP Infomaniak :
-   - Hôte : `mail.infomaniak.com`
-   - Port : `587` (STARTTLS)
-3. Renseignez ces valeurs dans `backend/.env` sur le serveur
+2. Variables à renseigner dans `backend/.env` :
+   ```env
+   SMTP_HOST=mail.infomaniak.com
+   SMTP_PORT=587
+   SMTP_USER=contact@virtual-iz.fr
+   SMTP_PASS=votre_mot_de_passe_smtp
+   CONTACT_EMAIL=contact@virtual-iz.fr
+   ```
+
+### Si le backend est sur Railway (Option B) — utiliser Gmail
+
+⚠️ **Infomaniak bloque les connexions SMTP depuis les IPs cloud de Railway** (anti-spam). Il faut utiliser Gmail à la place.
+
+1. Sur ton compte Google → [Sécurité → Mots de passe des applications](https://myaccount.google.com/apppasswords)
+   - La validation en deux étapes doit être activée
+   - Crée un mot de passe d'application (nom : "Virtualiz Portfolio" ou autre)
+   - Google génère un mot de passe de **16 caractères** — copie-le, il ne s'affiche qu'une fois
+2. Dans les variables d'environnement Railway :
+   ```env
+   SMTP_HOST=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_USER=ton.adresse@gmail.com
+   SMTP_PASS=le-mot-de-passe-16-chars-genere-par-google
+   CONTACT_EMAIL=contact@virtual-iz.fr
+   ```
+3. Dans `backend/controllers/contactController.js`, vérifier que `secure` vaut bien `false` (port 587 = STARTTLS, pas SSL) :
+   ```js
+   secure: false,
+   ```
+
+> Les emails sont envoyés **depuis Gmail** mais le `replyTo` pointe vers l'adresse du visiteur. `CONTACT_EMAIL` (`contact@virtual-iz.fr`) reste l'adresse de réception.
 
 ---
 

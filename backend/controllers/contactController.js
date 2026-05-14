@@ -8,6 +8,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
 /** Envoie l'email de contact via SMTP. */
@@ -43,8 +46,9 @@ export const sendMessage = async (req, res, next) => {
     await sendContactEmail(req.body);
     res.json({ message: 'Message envoyé avec succès' });
   } catch (err) {
-    err.status = 500;
-    err.message = 'Erreur lors de l\'envoi du message';
-    next(err);
+    console.error('❌ Détail erreur SMTP :', err);
+    const sendErr = new Error('Erreur lors de l\'envoi du message');
+    sendErr.status = 500;
+    next(sendErr);
   }
 };
