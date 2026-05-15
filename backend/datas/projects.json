@@ -137,11 +137,11 @@
     ],
     "title3": "Défis",
     "p3": [
-      "L'association est constituée de bénévoles, et n'avait que très peu de budget à consacrer à la création d'un site. Nous avons donc opté pour une solution simple avec un site onepage hébergé gratuitement sur Vercel."
+      "L'association est constituée de bénévoles, et n'avait que très peu de budget à consacrer à la création d'un site."
     ],
     "title4": "Solutions apportées",
     "p4": [
-      "La solution d'un site onepage épuré, très simple à mettre en place, respectaient les contraintes. "
+      "La solution d'un site onepage épuré, très simple à mettre en place, respectaient les contraintes. Le site est hébergé gratuitement sur Netlify. "
     ],
     "filtres": [
       "front"
