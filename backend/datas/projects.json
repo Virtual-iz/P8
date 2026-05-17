@@ -37,7 +37,7 @@
   {
     "id": "api-site-de-notation-de-livres-vieux-grimoire",
     "title": "API et database d'un site de livres",
-    "p1": "Developpement backend d’une API pour Le vieux grimoire, afin de partager et noter ses livres favoris avec un compte utilisateur. Opérations CRUD sécurisées et Base de données.",
+    "p1": "Developpement backend d’une API pour Le vieux grimoire, afin de partager et noter ses livres favoris avec un compte utilisateur. Opérations CRUD sécurisées et Base de données MongoDB.",
     "cover": "Backend_grimoires-login.webp",
     "pictures": [
       "Backend_grimoires-login.webp",
