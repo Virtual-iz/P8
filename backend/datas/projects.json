@@ -3,14 +3,12 @@
     "id": "kasa_site-location-entre-particuliers",
     "title": "Site de location entre particuliers",
     "p1": "Developpement FrontEnd à partir de la maquette de Kasa, entreprise de location d’appartements et maisons entre particuliers.",
-    "cover": "React_Kasa-appart-responsive.png",
+    "cover": "React_Kasa-appart-responsive.webp",
     "pictures": [
-      "React_Kasa-appart-responsive.png",
-      "React_Kasa-code.png",
-      "React_Kasa-code_fondgris.png",
-      "React_Kasa-data-drop-details",
-      "React_Kasa-load-data.png",
-      "React_Kasa-reusable-component.png"
+      "React_Kasa-appart-responsive.webp",
+      "React_Kasa-reusable-component.webp",
+      "React_Kasa-code_fondgris.webp",
+      "React_Kasa-data-drop-details.webp"
     ],
     "demo": "https://virtual-iz.github.io/P5/",
     "github": "https://github.com/Virtual-iz/P5.git",
@@ -40,20 +38,15 @@
     "id": "api-site-de-notation-de-livres-vieux-grimoire",
     "title": "API et database d'un site de livres",
     "p1": "Developpement backend d’une API pour Le vieux grimoire, afin de partager et noter ses livres favoris avec un compte utilisateur. Opérations CRUD sécurisées et Base de données.",
-    "cover": "Backend_grimoires-without-back.png",
+    "cover": "Backend_grimoires-login.webp",
     "pictures": [
-      "Backend_grimoires-without-back.png",
-      "Backend_grimoires -token.png",
-      "Backend_grimoires-add.png",
-      "Backend_grimoires-book-data.png",
-      "Backend_grimoires-code.png",
-      "Backend_grimoires-database.png",
-      "Backend_grimoires-database-nosql-mongodb.png",
-      "Backend_grimoires-login.png",
-      "Backend_grimoires-maquette.png",
-      "Backend_grimoires-modifications.png",
-      "Backend_grimoires-routes.png",
-      "Backend_grimoires-structure.png"
+      "Backend_grimoires-login.webp",
+      "Backend_grimoires-routes.webp",
+      "Backend_grimoires-maquette.webp",
+      "Backend_grimoires-autorisations.webp",
+      "Backend_grimoires-database.webp",
+      "Backend_grimoires-add.webp",
+      "Backend_grimoires-code.webp"
     ],
     "demo": "https://vieuxgrimoire-front-production.up.railway.app/",
     "github": "https://github.com/Virtual-iz/P6.git",
@@ -88,12 +81,12 @@
     "id": "seo-et-correctifs-site-portfolio-existant",
     "title": "Amélioration SEO et correctifs",
     "p1": "Amélioration du site porfolio de Nina Carducci, résolution de bugs, accessibilité avec Wave et Lighthouse, travail sur le SEO pour le référencement",
-    "cover": "SEO_carducci-wave-apres.png",
+    "cover": "SEO_carducci-wave-apres.webp",
     "pictures": [
-      "SEO_carducci-wave-apres.png",
-      "SEO_carducci-lighthouse.png",
-      "SEO_carducci-wave.png",
-      "SEO_carducci-site.png"
+      "SEO_carducci-wave-apres.webp",
+      "SEO_carducci-lighthouse.webp",
+      "SEO_carducci-wave.webp",
+      "SEO_carducci-site.webp"
     ],
     "demo": "https://virtual-iz.github.io/P4/",
     "github": "https://github.com/Virtual-iz/P4.git",
@@ -125,9 +118,10 @@
     "id": "site-minimaliste-pour-association",
     "title": "Site minimaliste pour l'association Grain de Sel",
     "p1": "L'association Grain de Sel, hors les murs, souhaitait avoir un minimum de visibilité en ligne, avec un site simple, présentant les activités de l’association et les moyens de contact",
-    "cover": "Graindesel.png",
+    "cover": "Graindesel.webp",
     "pictures": [
-      "Graindesel.png"
+      "Graindesel.webp",
+      "Graindesel-accueil.webp"
     ],
     "demo": "https://graindesel.netlify.app/",
     "github": "",
@@ -157,9 +151,9 @@
     "id": "phototheque-wordpress-pour-une-photographe",
     "title": "Photothèque WordPress",
     "p1": "Création d'une photothèque pour des archives photographiques assez conséquentes.",
-    "cover": "PhotographerPortfolio.png",
+    "cover": "PhotographerPortfolio.webp",
     "pictures": [
-      "PhotographerPortfolio.png"
+      "PhotographerPortfolio.webp"
     ],
     "demo": "https://isabellezezima.com",
     "github": "",
@@ -191,9 +185,15 @@
     "id": "immersion-em-site-informatif-complexe-sur-une-maladie-invalidante",
     "title": "Site d'information sur une maladie invalidante",
     "p1": "Développement d'un site informatif complexe sur l'Encéphalomyélite Myalgique, maladie invalidante, destiné à sensibiliser le public et fournir des informations précises et fiables.",
-    "cover": "ImmersionEM-capture-accueil.png",
+    "cover": "ImmersionEM-extrait.webp",
     "pictures": [
-      "ImmersionEM-capture-accueil.png"
+      "ImmersionEM-extrait.webp",
+      "ImmersionEM-capture-page1.webp",
+      "ImmersionEM-articles-science-filtres.webp",
+      "ImmersionEM-capture-battery-animee.webp",
+      "ImmersionEM-capture-onglets-horizontaux.webp",  
+      "ImmersionEM-capture-onglets-stats.webp"
+
     ],
     "demo": "https://immersion-em.com",
     "github": "",
@@ -232,10 +232,10 @@
     "id": "flyer-pour-la-compagnie-de-danse-en-ka",
     "title": "Flyer pour la compagnie de danse En Ka",
     "p1": "Création d'un flyer pour la compagnie de danse En Ka, présentant globalement la compagnie au public et donnant les informations nécessaires pour les contacter ou assister à leurs spectacles.",
-    "cover": "EnKa-flyer1.jpg",
+    "cover": "EnKa-flyer1.webp",
     "pictures": [
-      "EnKa-flyer1.jpg",
-      "EnKa-flyer2.jpg"
+      "EnKa-flyer1.webp",
+      "EnKa-flyer2.webp"
     ],
     "demo": "",
     "github": "",
@@ -266,13 +266,13 @@
     "id": "photographies-culinaires-pour-bridor",
     "title": "Photographies culinaires pour Bridor",
     "p1": "Création de photographies culinaires pour la marque Bridor, mettant en valeur leur ligne de produits.",
-    "cover": "Bridor1.jpg",
+    "cover": "Bridor1.webp",
     "pictures": [
-      "Bridor1.jpg",
-      "Bridor2.jpg",
-      "Bridor3.jpg",
-      "Bridor4.jpg",
-      "Bridor5.jpg"
+      "Bridor1.webp",
+      "Bridor2.webp",
+      "Bridor3.webp",
+      "Bridor4.webp",
+      "Bridor5.webp"
     ],
     "title2": "Objectifs du projet",
     "p2": [
