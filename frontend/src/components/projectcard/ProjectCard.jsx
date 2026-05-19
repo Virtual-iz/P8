@@ -13,13 +13,19 @@ const ProjectCard = ({ item, onOpen, isAdmin, onEdit }) => {
 
   return (
     <article className="projectcard">
-      <img
-        src={`${IMG_URL}/${item.cover}`}
-        alt={`Couverture du projet : ${item.title}`}
-        width="800" height="200"
-        loading="lazy"
-        decoding="async"
-      />
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcSet={`${IMG_URL}/${item.cover.replace(/(\.\w+)$/, '_mobile$1')}`}
+        />
+        <img
+          src={`${IMG_URL}/${item.cover}`}
+          alt={`Couverture du projet : ${item.title}`}
+          width="800" height="200"
+          loading="lazy"
+          decoding="async"
+        />
+      </picture>
       <div className="content">
         <h3>{item.title}</h3>
         <p>{item.p1}</p>

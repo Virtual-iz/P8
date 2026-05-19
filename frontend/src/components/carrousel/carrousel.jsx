@@ -23,10 +23,16 @@ const Carrousel = ({ data }) => {
 
   return (
     <div className="carrousel">
-      <img
-        src={`${IMG_URL}/${data.pictures[currentIndex]}`}
-        alt={`Vue image n°${currentIndex + 1}`}
-      />
+      <picture>
+        <source
+          media="(max-width: 768px)"
+          srcSet={`${IMG_URL}/${data.pictures[currentIndex].replace(/(\.\w+)$/, '_mobile$1')}`}
+        />
+        <img
+          src={`${IMG_URL}/${data.pictures[currentIndex]}`}
+          alt={`Vue image n°${currentIndex + 1}`}
+        />
+      </picture>
       {showArrows && (
         <>
           <button
