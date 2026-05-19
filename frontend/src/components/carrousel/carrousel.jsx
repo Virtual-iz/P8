@@ -34,6 +34,7 @@ const Carrousel = ({ data }) => {
           width="800" height="500"
           loading="lazy"
           decoding="async"
+          onError={(e) => { e.currentTarget.src = `${IMG_URL}/${data.pictures[currentIndex]}`; }}
         />
       </picture>
       {showArrows && (

@@ -24,6 +24,7 @@ const ProjectCard = ({ item, onOpen, isAdmin, onEdit }) => {
           width="800" height="200"
           loading="lazy"
           decoding="async"
+          onError={(e) => { e.currentTarget.src = `${IMG_URL}/${item.cover}`; }}
         />
       </picture>
       <div className="content">
