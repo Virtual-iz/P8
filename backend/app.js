@@ -32,8 +32,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 app.use('/img', express.static(path.join(__dirname, 'img')));
 
 // ── Parsing JSON ──────────────────────────────────────────────────────────────
-// Limite à 10 Mo pour se prémunir des attaques DoS par payload massif
-app.use(express.json({ limit: '10mb' }));
+// Les uploads d'images passent par multer (multipart), pas par ce parser JSON
+app.use(express.json({ limit: '100kb' }));
 
 // ── CORS ──────────────────────────────────────────────────────────────────────
 // Liste blanche des origines autorisées à appeler l'API.

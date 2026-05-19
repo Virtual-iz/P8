@@ -1,14 +1,15 @@
 import './Header.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserLock } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 import Logo from '../../components/logo/Logo';
 import CvBtn from '../../components/btn/CvBtn';
 import SocialBtn from '../../components/btn/SocialBtn';
 const profilPic = '/profil-pic-virtualiz.webp';
 
-const Header = ({ openModal, isAdmin, onLogout }) => {
+// L'accès admin se fait via la route /admin (précédemment : bouton discret dans le header)
+const Header = ({ isAdmin, onLogout }) => {
   return (
     <header id="home">
 
@@ -39,14 +40,11 @@ const Header = ({ openModal, isAdmin, onLogout }) => {
 
         <article className="profilpic">
 
-          <button
-            className={`admin-btn ${isAdmin ? 'admin-btn--connected' : ''}`}
-            onClick={isAdmin ? onLogout : openModal}
-            title={isAdmin ? 'Se déconnecter' : 'Espace admin'}
-          >
-            <FontAwesomeIcon icon={faUserLock} />
-            {isAdmin && <span className="admin-btn__label">x</span>}
-          </button>
+          {isAdmin && (
+            <button className="logout-btn" onClick={onLogout} title="Se déconnecter">
+              <FontAwesomeIcon icon={faRightFromBracket} />
+            </button>
+          )}
 
           {/*
             Blob scalable : l'image ET le clipPath sont dans le même SVG avec un viewBox commun. SVG caché + clip-path CSS en coordonnées absolues.

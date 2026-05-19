@@ -11,7 +11,7 @@ export const login = (req, res) => {
   const token = jwt.sign(
     { role: 'admin' },
     process.env.JWT_SECRET,
-    { expiresIn: '2h' }
+    { expiresIn: '1h' }
   );
 
   res.json({ token });

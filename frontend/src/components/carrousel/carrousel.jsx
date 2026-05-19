@@ -30,7 +30,10 @@ const Carrousel = ({ data }) => {
         />
         <img
           src={`${IMG_URL}/${data.pictures[currentIndex]}`}
-          alt={`Vue image n°${currentIndex + 1}`}
+          alt={`${data.title} — image ${currentIndex + 1}`}
+          width="800" height="500"
+          loading="lazy"
+          decoding="async"
         />
       </picture>
       {showArrows && (

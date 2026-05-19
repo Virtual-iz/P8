@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState } from 'react';
 import Header from '../sections/header/Header';
 import NavBar from '../sections/navbar/NavBar';
 import About from '../sections/about/About';
@@ -9,19 +9,24 @@ import Contact from '../sections/contact/Contact';
 import Footer from '../sections/footer/Footer';
 import '../App.scss';
 
-// Chargé uniquement si l'utilisateur ouvre la modale admin
-const AdminLogin = lazy(() => import('../components/adminlogin/AdminLogin'));
-
+const getValidToken = () => {
+  const token = localStorage.getItem('admin_token');
+  if (!token) return null;
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (Date.now() >= payload.exp * 1000) {
+      localStorage.removeItem('admin_token');
+      return null;
+    }
+    return token;
+  } catch {
+    localStorage.removeItem('admin_token');
+    return null;
+  }
+};
 
 const Home = () => {
-  const [isAdmin, setIsAdmin]       = useState(!!localStorage.getItem('admin_token'));
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
-
-  const handleLogin = (token) => {
-    localStorage.setItem('admin_token', token);
-    setIsAdmin(true);
-    setIsAdminOpen(false);
-  };
+  const [isAdmin, setIsAdmin] = useState(!!getValidToken());
 
   const handleLogout = () => {
     localStorage.removeItem('admin_token');
@@ -31,27 +36,13 @@ const Home = () => {
   return (
     <main>
       <NavBar />
-      <Header
-        openModal={() => setIsAdminOpen(true)}
-        isAdmin={isAdmin}
-        onLogout={handleLogout}
-      />
+      <Header isAdmin={isAdmin} onLogout={handleLogout} />
       <About />
       <Services />
       <Portfolio isAdmin={isAdmin} />
       <Process />
       <Contact />
       <Footer />
-
-      {isAdminOpen && (
-        <Suspense fallback={null}>
-          <AdminLogin
-            isOpen={isAdminOpen}
-            onClose={() => setIsAdminOpen(false)}
-            onLogin={handleLogin}
-          />
-        </Suspense>
-      )}
     </main>
   );
 };

@@ -36,17 +36,36 @@ router.get('/', async (req, res) => {
   }
 });
 
+/** Vérifie si un fichier existe sur le disque. */
+const fileExists = async (filePath) => {
+  try { await fs.access(filePath); return true; }
+  catch { return false; }
+};
+
 /**
- * Convertit un fichier uploadé en WebP (qualité 80%, taille réduite à 80%).
- * Supprime le fichier temporaire après conversion.
+ * Redimensionne (−20%) et convertit en WebP un fichier uploadé.
+ * Si le fichier est déjà en WebP, la qualité est préservée à 95 pour éviter
+ * la dégradation liée au double encodage. Sinon, qualité 80.
+ * Le nom d'origine est conservé (sanitisé), avec suffixe numérique si doublon.
  * @returns {Promise<string>} Nom du fichier .webp généré.
  */
 const processImage = async (file) => {
-  const outputFilename = path.parse(file.filename).name + '.webp';
+  const baseName = path.parse(file.originalname).name
+    .replace(/\s+/g, '-')
+    .replace(/[^a-zA-Z0-9-_]/g, '');
+
+  let outputFilename = baseName + '.webp';
+  let counter = 1;
+  while (await fileExists(path.join(IMG_DIR, outputFilename))) {
+    outputFilename = `${baseName}-${counter}.webp`;
+    counter++;
+  }
+
   const outputPath = path.join(IMG_DIR, outputFilename);
 
-  // Lecture des dimensions réelles via metadata (file.width/height n'existent pas dans multer)
+  // file.width/height n'existent pas dans multer — lecture via metadata sharp
   const { width, height } = await sharp(file.path).metadata();
+  const quality = file.mimetype === 'image/webp' ? 95 : 80;
 
   await sharp(file.path)
     .resize({
@@ -55,10 +74,10 @@ const processImage = async (file) => {
       fit: 'inside',
       withoutEnlargement: true
     })
-    .webp({ quality: 80 })
+    .webp({ quality })
     .toFile(outputPath);
 
-  await fs.unlink(file.path); // Supprime le fichier temporaire
+  await fs.unlink(file.path);
   return outputFilename;
 };
 
@@ -112,14 +131,13 @@ router.post('/', auth, upload.array('images', 10), async (req, res) => {
     res.status(201).json(newProject);
   } catch (err) {
     console.error('❌ Erreur création projet:', err);
-    res.status(500).json({ message: 'Erreur création projet: ' + err.message });
+    res.status(500).json({ message: `Erreur création projet : ${err.message}` });
   }
 });
 
 /**
  * PUT /api/projects/:id — met à jour un projet existant (admin uniquement).
- * - Supprime du disque les images retirées de la liste (inspiré de books-ctrl.js)
- * - Convertit et ajoute les nouvelles images uploadées
+ * Supprime du disque les images retirées, convertit et ajoute les nouvelles.
  */
 router.put('/:id', auth, upload.array('images', 10), async (req, res) => {
   try {
@@ -161,7 +179,7 @@ router.put('/:id', auth, upload.array('images', 10), async (req, res) => {
     res.json(projects[index]);
   } catch (err) {
     console.error('❌ Erreur modification projet:', err);
-    res.status(500).json({ message: 'Erreur modification projet: ' + err.message });
+    res.status(500).json({ message: `Erreur modification projet : ${err.message}` });
   }
 });
 
@@ -176,18 +194,13 @@ router.delete('/:id', auth, async (req, res) => {
       return res.status(404).json({ message: 'Projet non trouvé' });
     }
 
-    // Supprime toutes les images associées au projet
-    const allPictures = projects[index].pictures || [];
-    if (allPictures.length > 0) {
-      await deleteImageFiles(allPictures);
-    }
-
+    await deleteImageFiles(projects[index].pictures || []);
     projects.splice(index, 1);
     await fs.writeFile(PROJECTS_PATH, JSON.stringify(projects, null, 2));
     res.json({ message: 'Projet supprimé' });
   } catch (err) {
     console.error('❌ Erreur suppression projet:', err);
-    res.status(500).json({ message: 'Erreur suppression projet: ' + err.message });
+    res.status(500).json({ message: `Erreur suppression projet : ${err.message}` });
   }
 });
 

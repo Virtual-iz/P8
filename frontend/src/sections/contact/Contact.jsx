@@ -30,11 +30,19 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
     setSuccess(false);
+
+    if (!isValidEmail(formData.email)) {
+      setError('Adresse email invalide');
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const res = await fetch(`${API_URL}/contact`, {
@@ -76,7 +84,7 @@ const Contact = () => {
       <div className="contact-wrapper">
 
         <div className="contact-map">
-          <img src={carteGrenoble} alt="Carte Grenoble" loading="lazy" />
+          <img src={carteGrenoble} alt="Carte de Grenoble" width="400" height="400" loading="lazy" decoding="async" />
         </div>
 
         <form onSubmit={handleSubmit} className="contact-form">
