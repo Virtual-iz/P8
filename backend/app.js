@@ -47,7 +47,8 @@ const allowedOrigins = [
 app.use(cors({
   origin: (origin, callback) => {
     // Autorise aussi les requêtes sans origin (Postman, curl)
-    if (!origin || allowedOrigins.includes(origin)) {
+    // Autorise tout port localhost pour le dev local (Vite peut utiliser 5173, 5174, etc.)
+    if (!origin || allowedOrigins.includes(origin) || /^http:\/\/localhost(:\d+)?$/.test(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));

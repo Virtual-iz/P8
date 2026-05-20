@@ -1,7 +1,5 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ALLOWED_SERVICES  = ['web', 'photo', 'video', 'design'];
@@ -9,6 +7,7 @@ const ALLOWED_DEADLINES = ['unknown', '1week', '2weeks', '1month', 'more'];
 
 /** Envoie l'email de contact via Resend. */
 const sendContactEmail = async ({ name, email, service, deadline, message }) => {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
     from: 'Portfolio Contact <contact@virtual-iz.fr>',
     to: process.env.CONTACT_EMAIL,
